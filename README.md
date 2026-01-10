@@ -11,20 +11,20 @@
 [![OWASP](https://img.shields.io/badge/OWASP-Top%2010%202021-blue)](https://owasp.org/Top10/)
 [![Metasploit](https://img.shields.io/badge/Metasploit-Framework-red)](https://www.metasploit.com/)
 
-## 📋 Descripción del Proyecto
+## Descripción del Proyecto
 
 Proyecto de demostración de auditoría de seguridad integral que incluye pentesting de aplicación web y técnicas avanzadas de pivoting para acceso a redes internas. El proyecto simula un escenario real de ataque multi-fase contra una infraestructura segmentada.
 
 **⚠️ Este proyecto es únicamente con fines educativos y debe ejecutarse solo en entornos controlados con autorización explícita.**
 
-## 🎯 Objetivos
+## Objetivos
 
-- ✅ Demostrar vulnerabilidades comunes del **OWASP Top 10 2021**
-- ✅ Ilustrar técnicas de **movimiento lateral** mediante pivoting
-- ✅ Documentar **metodología profesional** de pentesting
-- ✅ Proporcionar **evidencias** de explotación y remediación
+- Demostrar vulnerabilidades comunes del **OWASP Top 10 2021**
+- Ilustrar técnicas de **movimiento lateral** mediante pivoting
+- Documentar **metodología profesional** de pentesting
+- Proporcionar **evidencias** de explotación y remediación
 
-## 🏗️ Arquitectura del Laboratorio
+## Arquitectura del Laboratorio
 ```
 ┌─────────────────┐
 │   Kali Linux    │ 192.168.0.30
@@ -55,24 +55,24 @@ Proyecto de demostración de auditoría de seguridad integral que incluye pentes
 | **Ubuntu Mutillidae** | Ubuntu Server 20.04 | ens33 (Bridge)<br>ens37 (Host-Only) | 192.168.0.21<br>192.168.8.131 |
 | **Metasploitable** | Ubuntu 8.04 (Metasploitable 2) | eth0 (Host-Only) | 192.168.8.133 |
 
-## 🛠️ Herramientas Utilizadas
+## Herramientas Utilizadas
 
 ### Reconocimiento y Análisis
-- 🔍 **Burp Suite Community** - Proxy interceptor y análisis web
-- 🕷️ **Skipfish** - Web application security scanner
-- 🗺️ **Nmap** - Network mapper y port scanner
+-  **Burp Suite Community** - Proxy interceptor y análisis web
+-  **Skipfish** - Web application security scanner
+-  **Nmap** - Network mapper y port scanner
 
 ### Explotación
-- 💣 **Metasploit Framework** - Plataforma de explotación
-- 🦠 **Meterpreter** - Payload avanzado para post-explotación
-- 💉 **SQLMap** - Herramienta automatizada de SQL Injection (opcional)
+-  **Metasploit Framework** - Plataforma de explotación
+-  **Meterpreter** - Payload avanzado para post-explotación
+-  **SQLMap** - Herramienta automatizada de SQL Injection (opcional)
 
 ### Post-Explotación
-- 🔓 **John the Ripper** - Password cracker
-- 🐍 **Python** - Scripting y servidor HTTP
-- 🔑 **Hashcat** - Advanced password recovery
+-  **John the Ripper** - Password cracker
+-  **Python** - Scripting y servidor HTTP
+-  **Hashcat** - Advanced password recovery
 
-## 📊 Vulnerabilidades Identificadas
+## Vulnerabilidades Identificadas
 
 ### 🔴 Críticas (CVSS 9.0-10.0)
 
@@ -96,7 +96,7 @@ Proyecto de demostración de auditoría de seguridad integral que incluye pentes
 | **Security Misconfiguration** | 5.3 | Divulgación de información |
 | **Cryptographic Failures** | 6.5 | Contraseñas en texto plano |
 
-## 🚀 Cadena de Ataque Completa
+## Cadena de Ataque Completa
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                  FASE 1: RECONOCIMIENTO                  │
@@ -149,7 +149,7 @@ Proyecto de demostración de auditoría de seguridad integral que incluye pentes
 └─────────────────────────────────────────────────────────┘
 ```
 
-## 📁 Estructura del Repositorio
+## Estructura del Repositorio
 ```
 pentesting-web-pivoting/
 │
@@ -157,13 +157,13 @@ pentesting-web-pivoting/
 ├── README.en.md                       # English version
 ├── LICENSE                            # Licencia MIT
 │
-├── 📄 documentacion/
+├── documentacion/
 │   ├── informe-ejecutivo.md          # Informe completo en español
 │   ├── executive-report.en.md        # Full report in English
 │   ├── metodologia.md                # Metodología detallada
 │   └── recomendaciones.md            # Guía de remediación
 │
-├── 📸 evidencias/
+├── evidencias/
 │   ├── screenshots/
 │   │   ├── 01-burp-sitemap.png
 │   │   ├── 02-sqli-extraction.png
@@ -180,18 +180,18 @@ pentesting-web-pivoting/
 │       ├── metasploit-output.txt
 │       └── john-cracking-results.txt
 │
-├── 🛠️ scripts/
+├── scripts/
 │   ├── webshell.php                  # Webshell utilizada
 │   ├── payload-generator.sh          # Script de generación de payloads
 │   └── scan-automation.py            # Automatización de escaneos
 │
-└── 🎓 recursos/
+└── recursos/
     ├── setup-lab.md                  # Guía de montaje del laboratorio
     ├── comandos-utilizados.md        # Lista completa de comandos
     └── referencias.md                # Enlaces y recursos adicionales
 ```
 
-## 🔐 Credenciales Comprometidas
+## Credenciales Comprometidas
 
 ### Servidor Web (Mutillidae) - SQL Injection
 
@@ -299,7 +299,7 @@ $hashed = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 9. **Capacitación en Secure Coding**
 10. **Pentesting regular** (trimestral/anual)
 
-## 💡 Lecciones Aprendidas
+## Lecciones Aprendidas
 
 ### 1️⃣ Una vulnerabilidad = Compromiso total
 
@@ -311,7 +311,7 @@ La cadena de ataque demostró que una sola vulnerabilidad inicial puede escalar 
 
 Separar redes (DMZ / Interna) **no es suficiente** sin controles de firewall activos. Un atacante con acceso a la DMZ puede alcanzar fácilmente la red interna.
 
-### 3️⃣ Defense in Depth es esencial
+### 3️⃣ la defensa en profundidad es esencial
 
 Múltiples capas de seguridad:
 - ✔️ Validación de entrada (Prepared Statements)
@@ -329,7 +329,7 @@ Sin monitoreo activo, todo el ataque pasó **completamente desapercibido**. Un S
 - Tráfico anómalo hacia red interna
 - Conexiones Meterpreter
 
-## 🎓 Cómo Reproducir este Lab
+## Cómo Reproducir este Lab
 
 ### Prerrequisitos
 
@@ -370,10 +370,6 @@ Metasploit: eth0 → Host-Only (VMnet1)
 - [CWE Top 25](https://cwe.mitre.org/top25/)
 - [MITRE ATT&CK](https://attack.mitre.org/)
 
-### Libros Recomendados
-- "The Web Application Hacker's Handbook" - Dafydd Stuttard
-- "Metasploit: The Penetration Tester's Guide" - David Kennedy
-- "RTFM: Red Team Field Manual" - Ben Clark
 
 ## 👤 Autor
 
@@ -381,13 +377,13 @@ Metasploit: eth0 → Host-Only (VMnet1)
 
 Pentester Junior | eJPT Certified | Cybersecurity Enthusiast
 
-- 📧 Email: estefania.rammar@gmail.com
-- 💼 LinkedIn: [linkedin.com/in/estefania-ramirez-martinez](https://linkedin.com/in/estefania-ramirez-martinez)
-- 🐙 GitHub: [@estefaniaramirez](https://github.com/estefaniaramirez)
-- 🌐 Blog: [diariohacking.com](https://diariohacking.com)
-- 🏆 Certifications: eJPT (Junior Penetration Tester)
+- Email: estefania.rammar@gmail.com
+- LinkedIn: [linkedin.com/in/estefania-ramirez-martinez](https://linkedin.com/in/estefaniazerimar/)
+- GitHub: [@estefaniaramirez](https://github.com/3stefani)
+- Blog: [diariohacking.com](https://diariohacking.com)
+- Certificaciones: eJPT (Junior Penetration Tester)
 
-## 🤝 Contribuciones
+## Contribuciones
 
 Las contribuciones son bienvenidas. Si encuentras algún error o quieres mejorar la documentación:
 
@@ -397,7 +393,7 @@ Las contribuciones son bienvenidas. Si encuentras algún error o quieres mejorar
 4. Push a la rama (`git push origin feature/mejora`)
 5. Abre un Pull Request
 
-## 📝 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 ```
@@ -446,10 +442,7 @@ El autor **NO se hace responsable** del mal uso de la información o herramienta
 
 ---
 
-**⭐ Si este proyecto te resultó útil, no olvides darle una estrella en GitHub!**
-
-**🔄 Comparte este proyecto con otros profesionales de ciberseguridad**
 
 ---
 
-*Última actualización: Enero 2025*
+*Última actualización: Enero 2026*
