@@ -1,7 +1,7 @@
 # 🌐 Language / Idioma
 
-[![en](https://img.shields.io/badge/lang-English-blue.svg)](README.en.md)
-[![es](https://img.shields.io/badge/lang-Español-red.svg)](README.md)
+[![en](https://img.shields.io/badge/lang-English-blue.svg)](README.md)
+[![es](https://img.shields.io/badge/lang-Español-red.svg)](README.es.md)
 
 ---
 
