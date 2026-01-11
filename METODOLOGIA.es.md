@@ -212,8 +212,8 @@ skipfish -YO -o ~/Desktop/skipfish_resultados http://192.168.0.21/mutillidae/ind
 firefox ~/Desktop/skipfish_resultados/index.html
 ```
 
-**📸 Screenshot:** `02-skipfish-results.png`
-
+![Skipfish resultados](img/skipfish-resultados1.jpg)
+![Skipfish vulnerabilidades](img/skipfish-resultados2.jpg)
 ---
 
 ## 3. Fase 2: Explotación Web
@@ -245,7 +245,8 @@ Content-Length: 66
 username=usuario123&password=pass123&login-php-submit-button=Login
 ```
 
-**📸 Screenshot:** `03-burp-intercept-login.png`
+
+![Burpsuite - Petición Login capturada](img/peticion-login-capturado-burp.jpg)
 
 ---
 
@@ -273,8 +274,8 @@ username=admin' OR '1'='1&password=cualquiercosa&login-php-submit-button=Login
 ✅ Logged In Admin: admin (g0t r00t?)
 ```
 
-**📸 Screenshot:** `04-sqli-bypass-auth.png`
 
+![Iniciamos sesión como admin](img/burp-login-admin.jpg)
 ---
 
 #### Paso 3: Fuerza Bruta con Burp Intruder
@@ -335,8 +336,8 @@ Request | Payload 1   | Payload 2    | Status | Length
 - Status code: **302** (redirección)
 - Length: **Diferente** al resto (4523 vs 3891)
 
-**📸 Screenshot:** `05-burp-intruder-results.png`
 
+![Ataque Burpsuite exitoso](img/ataque-burp-exito.jpg)
 ---
 
 ### 3.2 SQL Injection - Extracción de Datos
@@ -371,8 +372,8 @@ adrian      somepassword
 ... [16 usuarios más]
 ```
 
-**📸 Screenshot:** `06-sqli-data-extraction.png`
 
+![Obtención de los datos de las cuentas](img/sql-obtencion-cuentas.jpg)
 ---
 
 #### 3.2.2 Bypass de Autenticación
@@ -464,8 +465,7 @@ user_poll_results
 ...
 ```
 
-**📸 Screenshot:** `07-sqli-tables-enumeration.png`
-
+![Lista de todas las tablas](img/listar-bd.jpg)
 ---
 
 #### 3.2.7 Extraer datos de tabla sensible (credit_cards)
@@ -530,7 +530,8 @@ estefania:x:1000:1000:estefania,,,:/home/estefania:/bin/bash
 ... [contenido completo]
 ```
 
-**📸 Screenshot:** `09-sqli-file-read.png`
+![Acceso a fichero de manea remota](img/acceder-fichero.remoto.jpg)
+
 
 ---
 
@@ -554,8 +555,7 @@ bin:x:2:2:bin:/bin:/usr/sbin/nologin
 ... [contenido completo de /etc/passwd]
 ```
 
-**📸 Screenshot:** `10-path-traversal.png`
-
+![Lextura archivo](img/path-traversal2.jpg)
 ---
 
 ### 3.4 Remote Code Execution - Webshell Upload
@@ -637,8 +637,7 @@ http://192.168.0.21/mutillidae/index.php?page=backdoor.php
 └─────────────────────────────────┘
 ```
 
-**📸 Screenshot:** `11-webshell-interface.png`
-
+![Interfaz de la webshell](img/interfaz-webshell.jpg)
 ---
 
 #### Paso 6: Ejecutar comandos
@@ -648,6 +647,7 @@ http://192.168.0.21/mutillidae/index.php?page=backdoor.php
 Command: whoami
 Resultado: www-data
 ```
+![Verificar usuario](img/verficar-usuario.jpg)
 
 **Comando 2: Listar archivos**
 ```
@@ -658,6 +658,9 @@ drwxr-xr-x  3 root     root      4096 sep 29  2023 ..
 -rw-r--r--  1 www-data www-data  8234 sep 29  2023 index.php
 -rw-rw-rw--  1 mysql    mysql      512 ene 10 14:23 backdoor.php
 ... [más archivos]
+
+
+![Listar archivos](img/listar-archivo.jpg)
 ```
 
 **Comando 3: Leer /etc/passwd**
@@ -666,7 +669,7 @@ Command: cat /etc/passwd
 Resultado: [contenido completo del archivo]
 ```
 
-**📸 Screenshot:** `12-webshell-commands.png`
+![Lectura archivo /etc/pswswd](img/leer-etc.jpg)
 
 ---
 
@@ -696,6 +699,7 @@ Command: ip addr show
 - **ens37:** 192.168.8.131 → **RED INTERNA descubierta!**
 
 **📸 Screenshot:** `13-network-discovery.png`
+![Lectura archivo /etc/pswswd](img/leer-etc.jpg)
 
 ---
 
