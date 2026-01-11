@@ -698,8 +698,7 @@ Command: ip addr show
 - **ens33:** 192.168.0.21 → Red externa (conocida)
 - **ens37:** 192.168.8.131 → **RED INTERNA descubierta!**
 
-**📸 Screenshot:** `13-network-discovery.png`
-![Lectura archivo /etc/pswswd](img/leer-etc.jpg)
+![Descubrimiento de la red interna](img/descubrir-red-interna.jpg)
 
 ---
 
@@ -721,7 +720,6 @@ PING 192.168.8.133 (192.168.8.133) 56(84) bytes of data.
 
 **✅ Host 192.168.8.133 activo (Metasploitable)**
 
-**📸 Screenshot:** `14-ping-metasploitable.png`
 
 ---
 
@@ -842,8 +840,8 @@ meterpreter >
 
 **✅ Sesión Meterpreter establecida!**
 
-**📸 Screenshot:** `15-meterpreter-session.png`
 
+![Obtenemos sesión de Meterpreter](img/kali-sesion-abierta.jpg)
 ---
 
 ### 5.5 Verificar Sesión Meterpreter
@@ -914,8 +912,9 @@ Active Routing Table
 
 **✅ Túnel de pivoting configurado correctamente**
 
-**📸 Screenshot:** `16-autoroute-configured.png`
 
+
+![Configuración de autoroute](img/add-route.jpg)
 ---
 
 ### 5.7 Escanear Red Interna a través del Pivoting
@@ -975,8 +974,7 @@ run
 8180/tcp open  unknown
 ```
 
-**📸 Screenshot:** `17-port-scan-via-pivoting.png`
-
+![Escaneo de puertos via pivoting](img/portscan.jpg)
 ---
 
 ## 6. Fase 5: Explotación Red Interna
