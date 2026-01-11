@@ -59,8 +59,8 @@ Proyecto de demostración de auditoría de seguridad integral que incluye pentes
 
 ### Reconocimiento y Análisis
 -  **Burp Suite Community** - Proxy interceptor y análisis web
--  **Skipfish** - Web application security scanner
--  **Nmap** - Network mapper y port scanner
+-  **Skipfish** - Escáner de seguridad de aplicaciones web
+-  **Nmap** - Mapeador de red y escáner de puertos
 
 ### Explotación
 -  **Metasploit Framework** - Plataforma de explotación
@@ -224,7 +224,7 @@ adrian:somepassword
 ❌ postgres: No crackeado
 ```
 
-## 📈 Resultados Clave
+## Resultados Clave
 
 | Métrica | Resultado |
 |---------|-----------|
@@ -235,19 +235,9 @@ adrian:somepassword
 | **Contraseñas Crackeadas** | 3 |
 | **Sistemas Comprometidos** | 2/2 (100%) |
 | **Acceso Root Obtenido** | ✅ Sí |
-| **Tiempo Total de Ataque** | ~4 horas |
 
-### Impacto por Fase
-```
-Fase 1 (Recon):           [████░░░░░░] 40% de información obtenida
-Fase 2 (Explotación Web): [██████████] 100% servidor web comprometido
-Fase 3 (Post-Exp):        [████████░░] 80% red interna descubierta
-Fase 4 (Pivoting):        [██████████] 100% túnel establecido
-Fase 5 (Red Interna):     [██████████] 100% servidor interno comprometido
-Fase 6 (Post-Exp Avz):    [███████░░░] 70% credenciales extraídas
-```
 
-## 🛡️ Recomendaciones de Remediación
+## Recomendaciones
 
 ### 🔴 Prioridad CRÍTICA (0-7 días)
 
@@ -301,17 +291,17 @@ $hashed = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 
 ## Lecciones Aprendidas
 
-### 1️⃣ Una vulnerabilidad = Compromiso total
+### Una vulnerabilidad = Compromiso total
 
 **SQL Injection** → **Webshell** → **Pivoting** → **Red interna comprometida**
 
 La cadena de ataque demostró que una sola vulnerabilidad inicial puede escalar hasta el compromiso completo de la infraestructura.
 
-### 2️⃣ La segmentación sin firewall es inútil
+### La segmentación sin firewall es inútil
 
 Separar redes (DMZ / Interna) **no es suficiente** sin controles de firewall activos. Un atacante con acceso a la DMZ puede alcanzar fácilmente la red interna.
 
-### 3️⃣ la defensa en profundidad es esencial
+### La defensa en profundidad es esencial
 
 Múltiples capas de seguridad:
 - ✔️ Validación de entrada (Prepared Statements)
@@ -321,7 +311,7 @@ Múltiples capas de seguridad:
 - ✔️ Monitoreo activo
 - ✔️ Respuesta a incidentes
 
-### 4️⃣ La detección es tan importante como la prevención
+### La detección es tan importante como la prevención
 
 Sin monitoreo activo, todo el ataque pasó **completamente desapercibido**. Un SOC con alertas configuradas habría detectado:
 - Múltiples errores SQL
@@ -412,7 +402,7 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
 
-## ⚠️ Disclaimer Legal
+## ⚠️ Descargo de Responsabilidad Legal
 
 **IMPORTANTE: Este proyecto es únicamente con fines educativos y de investigación en seguridad.**
 
