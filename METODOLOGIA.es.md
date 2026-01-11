@@ -177,7 +177,7 @@ http://192.168.0.21
     └── styles/
 ```
 
-**📸 Screenshot:** `01-burp-sitemap.png`
+![Burpsuite Sitemap](img/burpsuite-sitemap.jpg)
 
 ---
 
