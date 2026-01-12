@@ -322,15 +322,15 @@ Click en "Start attack"
 ```
 Request | Payload 1   | Payload 2    | Status | Length
 --------|-------------|--------------|--------|-------
-45      | estefania   | estefania123 | 302    | 4523  ← Exitoso
-12      | admin       | admin        | 302    | 4523  ← Exitoso
-23      | john        | monkey       | 302    | 4523  ← Exitoso
-...otros intentos...  | 200    | 3891  ← Fallidos
+45      | estefania   | estefania123 | 302    | 459  ← Exitoso
+12      | admin       | admin        | 200    | 59645  ← Fallido
+23      | john        | monkey       | 200    | 59645  ← Fallido
+...otros intentos...  | 200    | 59645  ← Fallidos
 ```
 
 **Identificar login exitoso:**
 - Status code: **302** (redirección)
-- Length: **Diferente** al resto (4523 vs 3891)
+- Length: **Diferente** al resto (459 vs 59645)
 
 
 ![Ataque Burpsuite exitoso](img/ataque-burp-exito.jpg)
