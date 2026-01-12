@@ -1050,12 +1050,14 @@ msfadmin:$1$XN10Zj2c$Rt/zzCW3mLtUWA.ihZjA5/
 postgres:$1$Rw35ik.x$MgQgZUuO5pAoUvfJhfcYe/
 user:$1$HESu9xrH$k.o3G93DGoXIiQKkPmUgZ0
 service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//
-
+```
 
 ![Extracción del archivo shadow](img/cat-etc.jpg)
 
-7.2 Identificar Tipo de Hash
+### 7.2 Identificar Tipo de Hash
+
 bash# Desde Kali:
+```
 hashid '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
 ```
 
