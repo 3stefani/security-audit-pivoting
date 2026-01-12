@@ -173,7 +173,7 @@ http://192.168.0.21
     └── styles/
 ```
 
-![Burpsuite Sitemap](img/burpsuite-sitemap.jpg)
+![Burpsuite Sitemap](../img/burpsuite-sitemap.jpg)
 
 ---
 
