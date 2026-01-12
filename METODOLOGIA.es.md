@@ -1038,7 +1038,7 @@ service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//:14715:0:99999:7:::
 ```
 
 **Guardar hashes:**
-# Desde Kali, crear archivo hashes.txt:
+Desde Kali, crear archivo hashes.txt:
 ```
 nano hashes.txt
 ```
