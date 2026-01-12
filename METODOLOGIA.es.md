@@ -351,7 +351,7 @@ OWASP 2017 → A1 - Injection (SQL) → SQLi - Extract Data → User Info (SQL)
 ' OR 1=1-- 
 ```
 
-**Campo:** Name  
+**Campo:** Name. Aquí introducimos nuestro payload SQL ' OR 1=1--
 **Resultado:** 26 usuarios con contraseñas en texto plano
 ```
 Username    Password    Signature
