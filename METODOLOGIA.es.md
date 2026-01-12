@@ -1070,11 +1070,15 @@ Analyzing '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
 [+] Cisco-IOS(MD5)
 [+] FreeBSD MD5
 Conclusión: Hashes MD5 Crypt ($1$)
+```
 
-7.3 Cracking con John the Ripper
+![Averiguar tipo de hash](img/tipo-hash.jpg)
+
+### 7.3 Cracking con John the Ripper
 bash# Desde Kali:
 john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 ```
+
 
 **Proceso:**
 ```
