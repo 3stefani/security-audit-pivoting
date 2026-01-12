@@ -423,7 +423,7 @@ OWASP 2017 → A1 - Injection (SQL) → SQLi - Bypass Authentication → Login
 ```
 mutillidae
 ```
-
+![Obtención del nombre de la base de datos](img/nombre-base-datos.jpg)
 ---
 
 #### 3.2.5 Obtener versión de MySQL
@@ -437,7 +437,7 @@ mutillidae
 ```
 5.7.33-0ubuntu0.20.04.1
 ```
-
+![Obtención del nombre de la base de datos](img/version-bd.jpg)
 ---
 
 #### 3.2.6 Listar todas las tablas
