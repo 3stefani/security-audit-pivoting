@@ -1035,9 +1035,11 @@ msfadmin:$1$XN10Zj2c$Rt/zzCW3mLtUWA.ihZjA5/:14684:0:99999:7:::
 postgres:$1$Rw35ik.x$MgQgZUuO5pAoUvfJhfcYe/:14685:0:99999:7:::
 user:$1$HESu9xrH$k.o3G93DGoXIiQKkPmUgZ0:14699:0:99999:7:::
 service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//:14715:0:99999:7:::
+```
 
-Guardar hashes:
+**Guardar hashes:**
 # Desde Kali, crear archivo hashes.txt:
+```
 nano hashes.txt
 ```
 
