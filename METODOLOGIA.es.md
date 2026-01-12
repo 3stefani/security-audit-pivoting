@@ -135,7 +135,7 @@ burpsuite &
 3. Configuración manual del proxy:
    - Proxy HTTP: 127.0.0.1
    - Puerto: 8080
-   - ✅ Usar también para HTTPS
+   - Usar también para HTTPS
 4. Aceptar
 ```
 
