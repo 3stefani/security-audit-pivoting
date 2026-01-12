@@ -512,6 +512,7 @@ sudo chmod 777 /var/www/html/mutillidae/
 ls -ld /var/www/html/mutillidae/
 # Resultado: drwxrwxrwx
 ```
+![Verificación de permisos](img/verificar-permisos.jpg)
 
 #### Paso 2: Crear código de webshell
 
