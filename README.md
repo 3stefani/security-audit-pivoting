@@ -150,17 +150,19 @@ Comprehensive security audit demonstration project featuring web application pen
 ```
 
 ## Repository Structure
+```text
 pentesting-web-pivoting/
 │
-├── README.md                          # Spanish version 
-├── README.es.md                       # This file (English)
+├── README.md                          # Spanish version
+├── README.es.md                       # English version
 │
-├── 📄 documentation/
+├── documentation/
 │   ├── executive-report.md            # Full report in English
-│   ├── informe-ejecutivo.es.md       # Complete report in Spanish
+│   ├── informe-ejecutivo.es.md        # Complete report in Spanish
 │   └── methodology.md                 # Detailed methodology
 │
-└── img/                              # Images of the process
+└── img/
+```
 
 ## Compromised Credentials
 
