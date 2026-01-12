@@ -11,20 +11,20 @@
 [![OWASP](https://img.shields.io/badge/OWASP-Top%2010%202021-blue)](https://owasp.org/Top10/)
 [![Metasploit](https://img.shields.io/badge/Metasploit-Framework-red)](https://www.metasploit.com/)
 
-## 📋 Project Description
+## Project Description
 
 Comprehensive security audit demonstration project featuring web application pentesting and advanced pivoting techniques for internal network access. The project simulates a real-world multi-phase attack scenario against a segmented infrastructure.
 
 **⚠️ This project is for educational purposes only and must be executed exclusively in controlled environments with explicit authorization.**
 
-## 🎯 Objectives
+## Objectives
 
-- ✅ Demonstrate common vulnerabilities from **OWASP Top 10 2021**
-- ✅ Illustrate **lateral movement** techniques through pivoting
-- ✅ Document **professional pentesting** methodology
-- ✅ Provide exploitation and remediation **evidence**
+- Demonstrate common vulnerabilities from **OWASP Top 10 2021**
+- Illustrate **lateral movement** techniques through pivoting
+- Document **professional pentesting** methodology
+- Provide exploitation and remediation **evidence**
 
-## 🏗️ Lab Architecture
+## Lab Architecture
 ```
 ┌─────────────────┐
 │   Kali Linux    │ 192.168.0.30
@@ -55,24 +55,24 @@ Comprehensive security audit demonstration project featuring web application pen
 | **Ubuntu Mutillidae** | Ubuntu Server 20.04 | ens33 (Bridge)<br>ens37 (Host-Only) | 192.168.0.21<br>192.168.8.131 |
 | **Metasploitable** | Ubuntu 8.04 (Metasploitable 2) | eth0 (Host-Only) | 192.168.8.133 |
 
-## 🛠️ Tools Used
+## Tools Used
 
 ### Reconnaissance and Analysis
-- 🔍 **Burp Suite Community** - Intercepting proxy and web analysis
-- 🕷️ **Skipfish** - Web application security scanner
-- 🗺️ **Nmap** - Network mapper and port scanner
+- **Burp Suite Community** - Intercepting proxy and web analysis
+- **Skipfish** - Web application security scanner
+- **Nmap** - Network mapper and port scanner
 
 ### Exploitation
-- 💣 **Metasploit Framework** - Exploitation platform
-- 🦠 **Meterpreter** - Advanced post-exploitation payload
-- 💉 **SQLMap** - Automated SQL Injection tool (optional)
+- **Metasploit Framework** - Exploitation platform
+- **Meterpreter** - Advanced post-exploitation payload
+- **SQLMap** - Automated SQL Injection tool (optional)
 
 ### Post-Exploitation
-- 🔓 **John the Ripper** - Password cracker
-- 🐍 **Python** - Scripting and HTTP server
-- 🔑 **Hashcat** - Advanced password recovery
+- **John the Ripper** - Password cracker
+- **Python** - Scripting and HTTP server
+- **Hashcat** - Advanced password recovery
 
-## 📊 Identified Vulnerabilities
+## Identified Vulnerabilities
 
 ### 🔴 Critical (CVSS 9.0-10.0)
 
@@ -96,7 +96,7 @@ Comprehensive security audit demonstration project featuring web application pen
 | **Security Misconfiguration** | 5.3 | Information disclosure |
 | **Cryptographic Failures** | 6.5 | Plaintext passwords |
 
-## 🚀 Complete Attack Chain
+## Complete Attack Chain
 ```
 ┌─────────────────────────────────────────────────────────┐
 │              PHASE 1: RECONNAISSANCE                     │
@@ -246,25 +246,25 @@ iptables -A FORWARD -i ens33 -o ens37 -p tcp --dport 443 -j ACCEPT
 9. **Secure Coding training**
 10. **Regular pentesting**
 
-## 💡 Lessons Learned
+## Lessons Learned
 
-### 1️⃣ One vulnerability = Total compromise
+### 1️One vulnerability = Total compromise
 
 **SQL Injection** → **Webshell** → **Pivoting** → **Internal network compromised**
 
-### 2️⃣ Segmentation without firewall is useless
+### 2️Segmentation without firewall is useless
 
 Separating networks (DMZ / Internal) **is not enough** without active firewall controls.
 
-### 3️⃣ Defense in Depth is essential
+### 3️Defense in Depth is essential
 
 Multiple security layers are required for effective protection.
 
-### 4️⃣ Detection is as important as prevention
+### 4️Detection is as important as prevention
 
 Without active monitoring, the entire attack went **completely undetected**.
 
-## 🎓 How to Reproduce this Lab
+## How to Reproduce this Lab
 
 ### Prerequisites
 
@@ -288,9 +288,9 @@ Ubuntu:        ens33 → Bridge
 Metasploitable: eth0 → Host-Only (VMnet1)
 ```
 
-3. **Follow detailed guide:** [lab-setup.md](resources/lab-setup.md)
+3. **Follow detailed guide:** [lab-setup.md](resources/lab-setup.md) (SOON)
 
-## 📚 References and Resources
+## References and Resources
 
 ### Official Documentation
 - [OWASP Top 10 2021](https://owasp.org/Top10/)
@@ -317,7 +317,7 @@ Junior Pentester | eJPT Certified | Cybersecurity Enthusiast
 - Blog: [diariohacking.com](https://diariohacking.com)
 - Certificaciones: eJPT (Junior Penetration Tester)
 
-## 📝 License
+## License
 
 Copyright (c) 2026 Estefanía Ramírez Martínez
 
@@ -345,7 +345,7 @@ The author is **NOT responsible** for misuse of the information or tools present
 
 ---
 
-## 🌟 Acknowledgments
+## Acknowledgments
 
 - **OWASP** for providing invaluable web security resources
 - **Metasploit Team** for the excellent pentesting platform
@@ -355,4 +355,4 @@ The author is **NOT responsible** for misuse of the information or tools present
 
 ---
 
-*Last updated: January 2025*
+*Last updated: January 2026*
