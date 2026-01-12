@@ -790,7 +790,6 @@ Architecture : x64
 BuildTuple   : i486-linux-musl
 Meterpreter  : x86/linux
 ```
-verifica-sysinfo
 ![Verificar Sysinfo](img/verifica-sysinfo.jpg)
 
 ```
