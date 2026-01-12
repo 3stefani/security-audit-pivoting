@@ -894,6 +894,8 @@ run
 [*] Auxiliary module execution completed
 ```
 
+![Escaneo de redes](img/portscan.jpg)
+
 **Escaneo más completo:**
 ```
 set PORTS 1-10000
