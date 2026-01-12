@@ -683,7 +683,7 @@ No encoder specified, outputting raw payload
 Payload size: 123 bytes
 Final size of elf file: 207 bytes
 ```
-payload-meterpreter
+
 ![Payload en Meterpreter](img/payload-meterpreter.jpg)
 
 **Verificar creación:**
@@ -691,7 +691,7 @@ payload-meterpreter
 ls -lh shell.elf
 # -rw-r--r-- 1 kali kali 207 ene 9 13:15 shell.elf
 ```
-
+![Verificación de la creación del payload](img/verificar-payload.jpg)
 ---
 
 ### 5.2 Transferir Payload a Ubuntu
