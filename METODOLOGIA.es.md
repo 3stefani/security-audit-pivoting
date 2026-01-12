@@ -750,7 +750,6 @@ exploit
 ```
 [*] Started reverse TCP handler on 192.168.0.30:4444
 ```
-handler
 ![Handler](img/handler.jpg)
 
 **⏳ Esperando conexión...**
