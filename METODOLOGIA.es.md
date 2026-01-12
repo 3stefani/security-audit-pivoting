@@ -55,25 +55,21 @@
 ```
 1. VM → Settings → Network Adapter
 2. Adapter 1: Bridged (Automatic)
-3. ✅ Connect at power on
 ```
 
 #### Ubuntu Mutillidae:
 ```
 1. VM → Settings → Network Adapter
 2. Adapter 1: Bridged (Automatic)
-3. ✅ Connect at power on
 
-4. VM → Settings → Add → Network Adapter
-5. Adapter 2: Custom (VMnet1 - Host-only)
-6. ✅ Connect at power on
+3. VM → Settings → Add → Network Adapter
+4. Adapter 2: Custom (VMnet1 - Host-only)
 ```
 
 #### Metasploitable:
 ```
 1. VM → Settings → Network Adapter
 2. Adapter 1: Custom (VMnet1 - Host-only)
-3. ✅ Connect at power on
 ```
 
 ### 1.4 Verificación de Conectividad
