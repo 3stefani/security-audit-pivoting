@@ -872,6 +872,7 @@ Resultado:
 
 ### 5.7 Escanear Red Interna a través del Pivoting
 ```
+meterpreter > exit
 meterpreter > background
 ```
 
