@@ -851,9 +851,23 @@ Active Routing Table
 
 **✅ Túnel de pivoting configurado correctamente**
 
-
-
 ![Configuración de autoroute](img/add-route.jpg)
+
+Introducimos los siguientes comandos para averiguar la IP de Metasploitable
+
+```
+shell
+ipneighbor
+Comprobamos que ya tenemos las IPs
+```
+
+Resultado:
+192.168.0.30 → Mi Kali (Alcanzable - REACHABLE)
+192.168.8.133 → Esta debe ser Metasploitable 
+192.168.8.1 y 192.168.8.254 → Gateways de la red host-only
+
+
+![Encontrar IP Metasploitable](img/encontrar-ip-meta.jpg)
 ---
 
 ### 5.7 Escanear Red Interna a través del Pivoting
