@@ -604,10 +604,10 @@ drwxr-xr-x  3 root     root      4096 sep 29  2023 ..
 -rw-r--r--  1 www-data www-data  8234 sep 29  2023 index.php
 -rw-rw-rw--  1 mysql    mysql      512 ene 10 14:23 backdoor.php
 ... [más archivos]
-
+```
 
 ![Listar archivos](img/listar-archivo.jpg)
-```
+
 
 **Comando 3: Leer /etc/passwd**
 ```
