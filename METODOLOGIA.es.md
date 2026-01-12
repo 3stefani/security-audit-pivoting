@@ -896,6 +896,8 @@ run
 
 ![Escaneo de redes](img/portscan.jpg)
 
+Parece que los puertos típicos (21, 22, 23, 80, 139, 445) están filtrados o cerrados. Vamos a hacer un escaneo más amplio y luego explotar algún servicio.
+
 **Escaneo más completo:**
 ```
 set PORTS 1-10000
