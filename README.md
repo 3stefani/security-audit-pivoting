@@ -1,201 +1,172 @@
 # 🌐 Language / Idioma
 
-[![en](https://img.shields.io/badge/lang-English-blue.svg)](README.md)
-[![es](https://img.shields.io/badge/lang-Español-red.svg)](README.es.md)
+[![en](https://img.shields.io/badge/lang-English-blue.svg)](README.en.md)
+[![es](https://img.shields.io/badge/lang-Español-red.svg)](README.md)
 
 ---
 
-# Auditoría de Seguridad - Pentesting Web y Pivoting de Red
+# Security Audit - Web Pentesting and Network Pivoting
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![OWASP](https://img.shields.io/badge/OWASP-Top%2010%202021-blue)](https://owasp.org/Top10/)
 [![Metasploit](https://img.shields.io/badge/Metasploit-Framework-red)](https://www.metasploit.com/)
 
-## Descripción del Proyecto
+## 📋 Project Description
 
-Proyecto de demostración de auditoría de seguridad integral que incluye pentesting de aplicación web y técnicas avanzadas de pivoting para acceso a redes internas. El proyecto simula un escenario real de ataque multi-fase contra una infraestructura segmentada.
+Comprehensive security audit demonstration project featuring web application pentesting and advanced pivoting techniques for internal network access. The project simulates a real-world multi-phase attack scenario against a segmented infrastructure.
 
-**⚠️ Este proyecto es únicamente con fines educativos y debe ejecutarse solo en entornos controlados con autorización explícita.**
+**⚠️ This project is for educational purposes only and must be executed exclusively in controlled environments with explicit authorization.**
 
-## Objetivos
+## 🎯 Objectives
 
-- Demostrar vulnerabilidades comunes del **OWASP Top 10 2021**
-- Ilustrar técnicas de **movimiento lateral** mediante pivoting
-- Documentar **metodología profesional** de pentesting
-- Proporcionar **evidencias** de explotación y remediación
+- ✅ Demonstrate common vulnerabilities from **OWASP Top 10 2021**
+- ✅ Illustrate **lateral movement** techniques through pivoting
+- ✅ Document **professional pentesting** methodology
+- ✅ Provide exploitation and remediation **evidence**
 
-## Arquitectura del Laboratorio
+## 🏗️ Lab Architecture
 ```
 ┌─────────────────┐
 │   Kali Linux    │ 192.168.0.30
-│   (Atacante)    │
+│   (Attacker)    │
 └────────┬────────┘
-         │ Red Bridge
+         │ Bridged Network
          │
 ┌────────▼────────────────┐
 │ Ubuntu Mutillidae       │
 │ DMZ:  192.168.0.21      │
 │ INT:  192.168.8.131     │
-│ (Servidor Web)          │
+│ (Web Server)            │
 └────────┬────────────────┘
-         │ Red Host-Only
+         │ Host-Only Network
          │
 ┌────────▼────────────────┐
 │  Metasploitable         │
 │  192.168.8.133          │
-│  (Servidor Interno)     │
+│  (Internal Server)      │
 └─────────────────────────┘
 ```
 
-### Especificaciones Técnicas
+### Technical Specifications
 
-| Máquina | Sistema Operativo | Interfaces | IP |
-|---------|-------------------|------------|-----|
+| Machine | Operating System | Interfaces | IP |
+|---------|------------------|------------|-----|
 | **Kali Linux** | Kali Linux 2024.x | eth0 | 192.168.0.30 |
 | **Ubuntu Mutillidae** | Ubuntu Server 20.04 | ens33 (Bridge)<br>ens37 (Host-Only) | 192.168.0.21<br>192.168.8.131 |
 | **Metasploitable** | Ubuntu 8.04 (Metasploitable 2) | eth0 (Host-Only) | 192.168.8.133 |
 
-## Herramientas Utilizadas
+## 🛠️ Tools Used
 
-### Reconocimiento y Análisis
--  **Burp Suite Community** - Proxy interceptor y análisis web
--  **Skipfish** - Escáner de seguridad de aplicaciones web
--  **Nmap** - Mapeador de red y escáner de puertos
+### Reconnaissance and Analysis
+- 🔍 **Burp Suite Community** - Intercepting proxy and web analysis
+- 🕷️ **Skipfish** - Web application security scanner
+- 🗺️ **Nmap** - Network mapper and port scanner
 
-### Explotación
--  **Metasploit Framework** - Plataforma de explotación
--  **Meterpreter** - Payload avanzado para post-explotación
--  **SQLMap** - Herramienta automatizada de SQL Injection (opcional)
+### Exploitation
+- 💣 **Metasploit Framework** - Exploitation platform
+- 🦠 **Meterpreter** - Advanced post-exploitation payload
+- 💉 **SQLMap** - Automated SQL Injection tool (optional)
 
-### Post-Explotación
--  **John the Ripper** - Password cracker
--  **Python** - Scripting y servidor HTTP
--  **Hashcat** - Advanced password recovery
+### Post-Exploitation
+- 🔓 **John the Ripper** - Password cracker
+- 🐍 **Python** - Scripting and HTTP server
+- 🔑 **Hashcat** - Advanced password recovery
 
-## Vulnerabilidades Identificadas
+## 📊 Identified Vulnerabilities
 
-### 🔴 Críticas (CVSS 9.0-10.0)
+### 🔴 Critical (CVSS 9.0-10.0)
 
-| Vulnerabilidad | CVSS | Impacto |
-|----------------|------|---------|
-| **SQL Injection** | 9.8 | Extracción de BD completa, bypass autenticación |
-| **Remote Code Execution** | 10.0 | Control total del servidor web |
-| **Samba Exploit (Pivoting)** | 9.6 | Acceso root a red interna |
+| Vulnerability | CVSS | Impact |
+|---------------|------|--------|
+| **SQL Injection** | 9.8 | Full database extraction, authentication bypass |
+| **Remote Code Execution** | 10.0 | Complete web server control |
+| **Samba Exploit (Pivoting)** | 9.6 | Root access to internal network |
 
-### 🟠 Altas (CVSS 7.0-8.9)
+### 🟠 High (CVSS 7.0-8.9)
 
-| Vulnerabilidad | CVSS | Impacto |
-|----------------|------|---------|
-| **Path Traversal** | 7.5 | Lectura de archivos sensibles |
-| **Broken Authentication** | 8.1 | Fuerza bruta sin restricciones |
+| Vulnerability | CVSS | Impact |
+|---------------|------|--------|
+| **Path Traversal** | 7.5 | Sensitive file reading |
+| **Broken Authentication** | 8.1 | Unrestricted brute force |
 
-### 🟡 Medias (CVSS 4.0-6.9)
+### 🟡 Medium (CVSS 4.0-6.9)
 
-| Vulnerabilidad | CVSS | Impacto |
-|----------------|------|---------|
-| **Security Misconfiguration** | 5.3 | Divulgación de información |
-| **Cryptographic Failures** | 6.5 | Contraseñas en texto plano |
+| Vulnerability | CVSS | Impact |
+|---------------|------|--------|
+| **Security Misconfiguration** | 5.3 | Information disclosure |
+| **Cryptographic Failures** | 6.5 | Plaintext passwords |
 
-## Cadena de Ataque Completa
+## 🚀 Complete Attack Chain
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                  FASE 1: RECONOCIMIENTO                  │
+│              PHASE 1: RECONNAISSANCE                     │
 ├─────────────────────────────────────────────────────────┤
-│ • Burp Suite → Mapeo de aplicación web                  │
-│ • Skipfish → Escaneo automatizado                       │
-│ • Identificación de vectores de ataque                  │
+│ • Burp Suite → Web application mapping                  │
+│ • Skipfish → Automated scanning                         │
+│ • Attack vector identification                          │
 └────────────────────┬────────────────────────────────────┘
                      ↓
 ┌─────────────────────────────────────────────────────────┐
-│               FASE 2: EXPLOTACIÓN WEB                    │
+│             PHASE 2: WEB EXPLOITATION                    │
 ├─────────────────────────────────────────────────────────┤
-│ • SQL Injection → 26 usuarios comprometidos             │
-│ • Webshell Upload → RCE como www-data                   │
-│ • Path Traversal → Lectura de /etc/passwd               │
-│ • Burp Intruder → Fuerza bruta de credenciales          │
+│ • SQL Injection → 26 users compromised                  │
+│ • Webshell Upload → RCE as www-data                     │
+│ • Path Traversal → /etc/passwd reading                  │
+│ • Burp Intruder → Credential brute force                │
 └────────────────────┬────────────────────────────────────┘
                      ↓
 ┌─────────────────────────────────────────────────────────┐
-│             FASE 3: POST-EXPLOTACIÓN                     │
+│           PHASE 3: POST-EXPLOITATION                     │
 ├─────────────────────────────────────────────────────────┤
-│ • ip addr show → Descubrimiento red 192.168.8.0/24      │
-│ • ping sweep → Host 192.168.8.133 identificado          │
-│ • Persistencia → Usuario SSH creado                     │
+│ • ip addr show → 192.168.8.0/24 network discovery       │
+│ • ping sweep → Host 192.168.8.133 identified            │
+│ • Persistence → SSH user created                        │
 └────────────────────┬────────────────────────────────────┘
                      ↓
 ┌─────────────────────────────────────────────────────────┐
-│                  FASE 4: PIVOTING                        │
+│                  PHASE 4: PIVOTING                       │
 ├─────────────────────────────────────────────────────────┤
-│ • msfvenom → Payload Meterpreter generado               │
-│ • Sesión Meterpreter establecida                        │
-│ • autoroute → Túnel a red interna configurado           │
-│ • Port scan → Servicios vulnerables identificados       │
+│ • msfvenom → Meterpreter payload generated              │
+│ • Meterpreter session established                       │
+│ • autoroute → Internal network tunnel configured        │
+│ • Port scan → Vulnerable services identified            │
 └────────────────────┬────────────────────────────────────┘
                      ↓
 ┌─────────────────────────────────────────────────────────┐
-│           FASE 5: EXPLOTACIÓN RED INTERNA                │
+│        PHASE 5: INTERNAL NETWORK EXPLOITATION            │
 ├─────────────────────────────────────────────────────────┤
 │ • Samba usermap_script (CVE-2007-2447)                  │
-│ • Shell root obtenida                                   │
-│ • /etc/shadow extraído                                  │
+│ • Root shell obtained                                   │
+│ • /etc/shadow extracted                                 │
 └────────────────────┬────────────────────────────────────┘
                      ↓
 ┌─────────────────────────────────────────────────────────┐
-│         FASE 6: POST-EXPLOTACIÓN AVANZADA                │
+│        PHASE 6: ADVANCED POST-EXPLOITATION               │
 ├─────────────────────────────────────────────────────────┤
-│ • John the Ripper → 3 contraseñas crackeadas            │
-│ • Enumeración completa del sistema                      │
-│ • Documentación de acceso root                          │
+│ • John the Ripper → 3 passwords cracked                 │
+│ • Complete system enumeration                           │
+│ • Root access documentation                             │
 └─────────────────────────────────────────────────────────┘
 ```
 
-## Estructura del Repositorio
-```
+## Repository Structure
 pentesting-web-pivoting/
 │
-├── README.md                          # Este archivo (Español)
-├── README.en.md                       # English version
-├── LICENSE                            # Licencia MIT
+├── README.md                          # Spanish version 
+├── README.es.md                       # This file (English)
 │
-├── documentacion/
-│   ├── informe-ejecutivo.md          # Informe completo en español
-│   ├── executive-report.en.md        # Full report in English
-│   ├── metodologia.md                # Metodología detallada
-│   └── recomendaciones.md            # Guía de remediación
+├── 📄 documentation/
+│   ├── executive-report.md            # Full report in English
+│   ├── informe-ejecutivo.es.md       # Complete report in Spanish
+│   └── methodology.md                 # Detailed methodology
 │
-├── evidencias/
-│   ├── screenshots/
-│   │   ├── 01-burp-sitemap.png
-│   │   ├── 02-sqli-extraction.png
-│   │   ├── 03-webshell-rce.png
-│   │   ├── 04-network-discovery.png
-│   │   ├── 05-meterpreter-session.png
-│   │   ├── 06-pivoting-autoroute.png
-│   │   ├── 07-samba-exploit.png
-│   │   └── 08-root-access.png
-│   │
-│   └── logs/
-│       ├── burp-http-history.txt
-│       ├── nmap-scans.txt
-│       ├── metasploit-output.txt
-│       └── john-cracking-results.txt
-│
-├── scripts/
-│   ├── webshell.php                  # Webshell utilizada
-│   ├── payload-generator.sh          # Script de generación de payloads
-│   └── scan-automation.py            # Automatización de escaneos
-│
-└── recursos/
-    ├── setup-lab.md                  # Guía de montaje del laboratorio
-    ├── comandos-utilizados.md        # Lista completa de comandos
-    └── referencias.md                # Enlaces y recursos adicionales
-```
+└── img/                              # Images of the process
 
-## Credenciales Comprometidas
+## Compromised Credentials
 
-### Servidor Web (Mutillidae) - SQL Injection
+### Web Server (Mutillidae) - SQL Injection
 
-**Total: 26 usuarios con contraseñas en texto plano**
+**Total: 26 users with plaintext passwords**
 ```
 admin:admin
 john:monkey
@@ -209,10 +180,9 @@ dave:password
 adrian:somepassword
 [... +16 usuarios adicionales]
 ```
+### Internal Server (Metasploitable) - Password Cracking
 
-### Servidor Interno (Metasploitable) - Password Cracking
-
-**Hashes MD5 crackeados con John the Ripper:**
+**MD5 hashes cracked with John the Ripper:**
 ```
 ✅ klog:123456789
 ✅ sys:batman
@@ -223,149 +193,123 @@ adrian:somepassword
 ❌ user: No crackeado
 ❌ postgres: No crackeado
 ```
+## Key Results
 
-## Resultados Clave
+| Metric | Result |
+|--------|--------|
+| **Critical Vulnerabilities** | 3 |
+| **High Vulnerabilities** | 2 |
+| **Medium Vulnerabilities** | 2 |
+| **Compromised Users** | 26 |
+| **Cracked Passwords** | 3 |
+| **Compromised Systems** | 2/2 (100%) |
+| **Root Access Obtained** | ✅ Yes |
+| **Total Attack Time** | ~4 hours |
 
-| Métrica | Resultado |
-|---------|-----------|
-| **Vulnerabilidades Críticas** | 3 |
-| **Vulnerabilidades Altas** | 2 |
-| **Vulnerabilidades Medias** | 2 |
-| **Usuarios Comprometidos** | 26 |
-| **Contraseñas Crackeadas** | 3 |
-| **Sistemas Comprometidos** | 2/2 (100%) |
-| **Acceso Root Obtenido** | ✅ Sí |
+## Remediation Recommendations
 
+### 🔴 CRITICAL Priority (0-7 days)
 
-## Recomendaciones
-
-### 🔴 Prioridad CRÍTICA (0-7 días)
-
-1. **Implementar Prepared Statements**
+1. **Implement Prepared Statements**
 ```php
 // ❌ VULNERABLE
 $query = "SELECT * FROM users WHERE username='$username'";
 
-// ✅ SEGURO
+// ✅ SECURE
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->execute([$username]);
 ```
 
-2. **Parchear Samba** (CVE-2007-2447)
+2. **Patch Samba** (CVE-2007-2447)
 ```bash
 sudo apt-get update && sudo apt-get upgrade samba
 ```
 
-3. **Segmentar red con firewall**
+3. **Network segmentation with firewall**
 ```bash
-# Bloquear tráfico DMZ → Red Interna por defecto
+# Block DMZ → Internal Network traffic by default
 iptables -A FORWARD -i ens33 -o ens37 -j DROP
-# Permitir solo tráfico específico autorizado
+# Allow only specific authorized traffic
 iptables -A FORWARD -i ens33 -o ens37 -p tcp --dport 443 -j ACCEPT
 ```
 
-### 🟠 Prioridad ALTA (1-4 semanas)
+### 🟠 HIGH Priority (1-4 weeks)
 
-4. **Implementar WAF**
-   - ModSecurity + OWASP Core Rule Set
-   - Cloudflare / AWS WAF
+4. **Implement WAF**
+5. **Rate Limiting and CAPTCHA**
+6. **Hash passwords with bcrypt**
 
-5. **Rate Limiting y CAPTCHA**
-```php
-if ($failed_attempts >= 3) {
-    require_captcha();
-}
-```
+### 🟡 MEDIUM Priority (1-3 months)
 
-6. **Hashear contraseñas**
-```php
-$hashed = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
-```
+7. **Implement IDS/IPS**
+8. **SIEM for event correlation**
+9. **Secure Coding training**
+10. **Regular pentesting**
 
-### 🟡 Prioridad MEDIA (1-3 meses)
+## 💡 Lessons Learned
 
-7. **Implementar IDS/IPS** (Snort, Suricata)
-8. **SIEM** para correlación de eventos
-9. **Capacitación en Secure Coding**
-10. **Pentesting regular** (trimestral/anual)
+### 1️⃣ One vulnerability = Total compromise
 
-## Lecciones Aprendidas
+**SQL Injection** → **Webshell** → **Pivoting** → **Internal network compromised**
 
-### Una vulnerabilidad = Compromiso total
+### 2️⃣ Segmentation without firewall is useless
 
-**SQL Injection** → **Webshell** → **Pivoting** → **Red interna comprometida**
+Separating networks (DMZ / Internal) **is not enough** without active firewall controls.
 
-La cadena de ataque demostró que una sola vulnerabilidad inicial puede escalar hasta el compromiso completo de la infraestructura.
+### 3️⃣ Defense in Depth is essential
 
-### La segmentación sin firewall es inútil
+Multiple security layers are required for effective protection.
 
-Separar redes (DMZ / Interna) **no es suficiente** sin controles de firewall activos. Un atacante con acceso a la DMZ puede alcanzar fácilmente la red interna.
+### 4️⃣ Detection is as important as prevention
 
-### La defensa en profundidad es esencial
+Without active monitoring, the entire attack went **completely undetected**.
 
-Múltiples capas de seguridad:
-- ✔️ Validación de entrada (Prepared Statements)
-- ✔️ WAF
-- ✔️ Firewall de red
-- ✔️ IDS/IPS
-- ✔️ Monitoreo activo
-- ✔️ Respuesta a incidentes
+## 🎓 How to Reproduce this Lab
 
-### La detección es tan importante como la prevención
-
-Sin monitoreo activo, todo el ataque pasó **completamente desapercibido**. Un SOC con alertas configuradas habría detectado:
-- Múltiples errores SQL
-- Creación de archivos PHP en directorio web
-- Tráfico anómalo hacia red interna
-- Conexiones Meterpreter
-
-## Cómo Reproducir este Lab
-
-### Prerrequisitos
+### Prerequisites
 
 - VMware Workstation / VirtualBox
-- 16GB RAM mínimo
-- 100GB espacio en disco
-- Conocimientos básicos de redes y Linux
+- 16GB RAM minimum
+- 100GB disk space
+- Basic knowledge of networking and Linux
 
-### Instalación
+### Installation
 
-1. **Descargar imágenes:**
+1. **Download images:**
    - [Kali Linux](https://www.kali.org/get-kali/)
    - [Metasploitable 2](https://sourceforge.net/projects/metasploitable/)
    - Ubuntu Server 20.04 + [Mutillidae](https://github.com/webpwnized/mutillidae)
 
-2. **Configurar redes:**
+2. **Configure networks:**
 ```
-Kali:       eth0 → Bridge
-Ubuntu:     ens33 → Bridge
-            ens37 → Host-Only (VMnet1)
-Metasploit: eth0 → Host-Only (VMnet1)
+Kali:          eth0 → Bridge
+Ubuntu:        ens33 → Bridge
+               ens37 → Host-Only (VMnet1)
+Metasploitable: eth0 → Host-Only (VMnet1)
 ```
 
-3. **Seguir guía detallada:** [setup-lab.md](recursos/setup-lab.md)
+3. **Follow detailed guide:** [lab-setup.md](resources/lab-setup.md)
 
-## 📚 Referencias y Recursos
+## 📚 References and Resources
 
-### Documentación Oficial
+### Official Documentation
 - [OWASP Top 10 2021](https://owasp.org/Top10/)
 - [Metasploit Unleashed](https://www.offsec.com/metasploit-unleashed/)
 - [Burp Suite Documentation](https://portswigger.net/burp/documentation)
 
-### CVEs Explotados
+### Exploited CVEs
 - [CVE-2007-2447](https://nvd.nist.gov/vuln/detail/CVE-2007-2447) - Samba usermap script
 
-### Herramientas
+### Tools
 - [CVSS Calculator 4.0](https://www.first.org/cvss/calculator/4.0)
 - [CWE Top 25](https://cwe.mitre.org/top25/)
 - [MITRE ATT&CK](https://attack.mitre.org/)
-
-
-## 👤 Autor
+- 
+## Author
 
 **Estefanía Ramírez Martínez**
 
-Pentester Junior | eJPT Certified | Cybersecurity Enthusiast
+Junior Pentester | eJPT Certified | Cybersecurity Enthusiast
 
 - Email: estefania.rammar@gmail.com
 - LinkedIn: [linkedin.com/in/estefania-ramirez-martinez](https://linkedin.com/in/estefaniazerimar/)
@@ -373,23 +317,9 @@ Pentester Junior | eJPT Certified | Cybersecurity Enthusiast
 - Blog: [diariohacking.com](https://diariohacking.com)
 - Certificaciones: eJPT (Junior Penetration Tester)
 
-## Contribuciones
+## 📝 License
 
-Las contribuciones son bienvenidas. Si encuentras algún error o quieres mejorar la documentación:
-
-1. Fork el proyecto
-2. Crea una rama (`git checkout -b feature/mejora`)
-3. Commit tus cambios (`git commit -m 'Añadir mejora'`)
-4. Push a la rama (`git push origin feature/mejora`)
-5. Abre un Pull Request
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
-```
-MIT License
-
-Copyright (c) 2025 Estefanía Ramírez Martínez
+Copyright (c) 2026 Estefanía Ramírez Martínez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -400,39 +330,29 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-```
+## ⚠️ Legal Disclaimer
 
-## ⚠️ Descargo de Responsabilidad Legal
+**IMPORTANT: This project is for educational and security research purposes only.**
 
-**IMPORTANTE: Este proyecto es únicamente con fines educativos y de investigación en seguridad.**
+- ✅ **Allowed:** Use in controlled environments and personal labs
+- ✅ **Allowed:** Pentesting with explicit written authorization
+- ❌ **Prohibited:** Use against systems without authorization
+- ❌ **Prohibited:** Illegal or malicious activities
 
-- ✅ **Permitido:** Uso en entornos controlados y laboratorios personales
-- ✅ **Permitido:** Pentesting con autorización explícita por escrito
-- ❌ **Prohibido:** Uso contra sistemas sin autorización
-- ❌ **Prohibido:** Actividades ilegales o maliciosas
+The author is **NOT responsible** for misuse of the information or tools presented in this repository. Unauthorized access to computer systems is **illegal** in most jurisdictions.
 
-El autor **NO se hace responsable** del mal uso de la información o herramientas presentadas en este repositorio. El acceso no autorizado a sistemas informáticos es **ilegal** en la mayoría de jurisdicciones y puede resultar en:
-
-- Penas de prisión
-- Multas económicas
-- Antecedentes penales
-- Demandas civiles
-
-**Actúa siempre de forma ética y legal. #EthicalHacking**
+**Always act ethically and legally. #EthicalHacking**
 
 ---
 
-## 🌟 Agradecimientos
+## 🌟 Acknowledgments
 
-- **OWASP** por proporcionar recursos invaluables de seguridad web
-- **Metasploit Team** por la excelente plataforma de pentesting
-- **Mutillidae Project** por la aplicación vulnerable educativa
-- **Offensive Security** por la metodología de pentesting
-- **Comunidad InfoSec** por compartir conocimiento libremente
-
----
-
+- **OWASP** for providing invaluable web security resources
+- **Metasploit Team** for the excellent pentesting platform
+- **Mutillaide Project** for the educational vulnerability application
+- **Offensive Security** for the pentesting methodology
+- **InfoSec Community** for freely sharing knowledge
 
 ---
 
-*Última actualización: Enero 2026*
+*Last updated: January 2025*
