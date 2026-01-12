@@ -683,6 +683,8 @@ No encoder specified, outputting raw payload
 Payload size: 123 bytes
 Final size of elf file: 207 bytes
 ```
+payload-meterpreter
+![Payload en Meterpreter](img/payload-meterpreter.jpg)
 
 **Verificar creación:**
 ```bash
