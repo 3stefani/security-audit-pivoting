@@ -831,6 +831,8 @@ meterpreter > run autoroute -s 192.168.8.0/24
 [*] Use the -p option to list all active routes
 ```
 
+![Creamos ruta](img/verificar-ruta.jpg)
+
 **Verificar rutas:**
 ```
 meterpreter > run autoroute -p
@@ -845,6 +847,7 @@ Active Routing Table
    ------             -------            -------
    192.168.8.0        255.255.255.0      Session 1
 ```
+![Creamos ruta](img/verificar-ruta.jpg)
 
 **✅ Túnel de pivoting configurado correctamente**
 
