@@ -389,7 +389,7 @@ OWASP 2017 → A1 - Injection (SQL) → SQLi - Bypass Authentication → Login
 
 **Resultado:**
 ```
-✅ Logged In Admin: admin (g0t r00t?)
+✅ Logged In Admin: admin
 ```
 
 ---
