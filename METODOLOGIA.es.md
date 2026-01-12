@@ -559,6 +559,8 @@ ls -la /var/www/html/mutillidae/ | grep backdoor
 -rw-rw-rw- 1 mysql mysql 512 ene 10 14:23 backdoor.php
 ```
 
+![Verificación de creación de la webshell](img/verificar-webshell-2026.jpg)
+
 **✅ Webshell creada exitosamente**
 
 ---
