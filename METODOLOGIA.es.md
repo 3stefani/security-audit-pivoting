@@ -784,12 +784,15 @@ meterpreter > sysinfo
 
 **Resultado:**
 ```
-Computer     : estefaniaubuntu
+Computer     : 192.168.0.21
 OS           : Ubuntu 20.04 (Linux 5.4.0-42-generic)
 Architecture : x64
 BuildTuple   : i486-linux-musl
 Meterpreter  : x86/linux
 ```
+verifica-sysinfo
+![Verificar Sysinfo](img/verifica-sysinfo.jpg)
+
 ```
 meterpreter > ifconfig
 ```
