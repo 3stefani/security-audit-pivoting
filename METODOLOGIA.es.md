@@ -814,6 +814,7 @@ Name         : ens37
 IPv4 Address : 192.168.8.131  ← Red interna
 ```
 
+![Interfaces](img/donde-metasploitable.jpg)
 ---
 
 ### 5.6 Configurar Autoroute (Pivoting)
