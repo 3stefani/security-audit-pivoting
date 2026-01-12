@@ -153,42 +153,15 @@ Proyecto de demostración de auditoría de seguridad integral que incluye pentes
 ```
 pentesting-web-pivoting/
 │
-├── README.md                          # Este archivo (Español)
-├── README.en.md                       # English version
-├── LICENSE                            # Licencia MIT
+├── README.md                          # English version
+├── README.es.md                       # Este archivo (Español)
 │
 ├── documentacion/
 │   ├── informe-ejecutivo.md          # Informe completo en español
 │   ├── executive-report.en.md        # Full report in English
-│   ├── metodologia.md                # Metodología detallada
-│   └── recomendaciones.md            # Guía de remediación
+│   └── metodologia.md                # Metodología detallada
 │
-├── evidencias/
-│   ├── screenshots/
-│   │   ├── 01-burp-sitemap.png
-│   │   ├── 02-sqli-extraction.png
-│   │   ├── 03-webshell-rce.png
-│   │   ├── 04-network-discovery.png
-│   │   ├── 05-meterpreter-session.png
-│   │   ├── 06-pivoting-autoroute.png
-│   │   ├── 07-samba-exploit.png
-│   │   └── 08-root-access.png
-│   │
-│   └── logs/
-│       ├── burp-http-history.txt
-│       ├── nmap-scans.txt
-│       ├── metasploit-output.txt
-│       └── john-cracking-results.txt
-│
-├── scripts/
-│   ├── webshell.php                  # Webshell utilizada
-│   ├── payload-generator.sh          # Script de generación de payloads
-│   └── scan-automation.py            # Automatización de escaneos
-│
-└── recursos/
-    ├── setup-lab.md                  # Guía de montaje del laboratorio
-    ├── comandos-utilizados.md        # Lista completa de comandos
-    └── referencias.md                # Enlaces y recursos adicionales
+└── img/                              # Imágenes del proceso
 ```
 
 ## Credenciales Comprometidas
@@ -224,7 +197,7 @@ adrian:somepassword
 ❌ postgres: No crackeado
 ```
 
-## 📈 Resultados Clave
+## Resultados Clave
 
 | Métrica | Resultado |
 |---------|-----------|
@@ -237,15 +210,6 @@ adrian:somepassword
 | **Acceso Root Obtenido** | ✅ Sí |
 | **Tiempo Total de Ataque** | ~4 horas |
 
-### Impacto por Fase
-```
-Fase 1 (Recon):           [████░░░░░░] 40% de información obtenida
-Fase 2 (Explotación Web): [██████████] 100% servidor web comprometido
-Fase 3 (Post-Exp):        [████████░░] 80% red interna descubierta
-Fase 4 (Pivoting):        [██████████] 100% túnel establecido
-Fase 5 (Red Interna):     [██████████] 100% servidor interno comprometido
-Fase 6 (Post-Exp Avz):    [███████░░░] 70% credenciales extraídas
-```
 
 ## Recomendaciones de Remediación
 
@@ -301,17 +265,17 @@ $hashed = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 
 ## Lecciones Aprendidas
 
-### 1️⃣ Una vulnerabilidad = Compromiso total
+### Una vulnerabilidad = Compromiso total
 
 **SQL Injection** → **Webshell** → **Pivoting** → **Red interna comprometida**
 
 La cadena de ataque demostró que una sola vulnerabilidad inicial puede escalar hasta el compromiso completo de la infraestructura.
 
-### 2️⃣ La segmentación sin firewall es inútil
+### La segmentación sin firewall es inútil
 
 Separar redes (DMZ / Interna) **no es suficiente** sin controles de firewall activos. Un atacante con acceso a la DMZ puede alcanzar fácilmente la red interna.
 
-### 3️⃣ la defensa en profundidad es esencial
+### la defensa en profundidad es esencial
 
 Múltiples capas de seguridad:
 - ✔️ Validación de entrada (Prepared Statements)
@@ -321,7 +285,7 @@ Múltiples capas de seguridad:
 - ✔️ Monitoreo activo
 - ✔️ Respuesta a incidentes
 
-### 4️⃣ La detección es tan importante como la prevención
+### La detección es tan importante como la prevención
 
 Sin monitoreo activo, todo el ataque pasó **completamente desapercibido**. Un SOC con alertas configuradas habría detectado:
 - Múltiples errores SQL
@@ -353,9 +317,9 @@ Ubuntu:     ens33 → Bridge
 Metasploit: eth0 → Host-Only (VMnet1)
 ```
 
-3. **Seguir guía detallada:** [setup-lab.md](recursos/setup-lab.md)
+3. **Seguir guía detallada:** [setup-lab.md](recursos/setup-lab.md) (PRÓXIMAMENTE)
 
-## 📚 Referencias y Recursos
+## Referencias y Recursos
 
 ### Documentación Oficial
 - [OWASP Top 10 2021](https://owasp.org/Top10/)
@@ -371,7 +335,7 @@ Metasploit: eth0 → Host-Only (VMnet1)
 - [MITRE ATT&CK](https://attack.mitre.org/)
 
 
-## 👤 Autor
+## Autor
 
 **Estefanía Ramírez Martínez**
 
@@ -383,23 +347,13 @@ Pentester Junior | eJPT Certified | Cybersecurity Enthusiast
 - Blog: [diariohacking.com](https://diariohacking.com)
 - Certificaciones: eJPT (Junior Penetration Tester)
 
-## Contribuciones
-
-Las contribuciones son bienvenidas. Si encuentras algún error o quieres mejorar la documentación:
-
-1. Fork el proyecto
-2. Crea una rama (`git checkout -b feature/mejora`)
-3. Commit tus cambios (`git commit -m 'Añadir mejora'`)
-4. Push a la rama (`git push origin feature/mejora`)
-5. Abre un Pull Request
-
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 ```
 MIT License
 
-Copyright (c) 2025 Estefanía Ramírez Martínez
+Copyright (c) 2026 Estefanía Ramírez Martínez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -432,7 +386,7 @@ El autor **NO se hace responsable** del mal uso de la información o herramienta
 
 ---
 
-## 🌟 Agradecimientos
+## Agradecimientos
 
 - **OWASP** por proporcionar recursos invaluables de seguridad web
 - **Metasploit Team** por la excelente plataforma de pentesting
