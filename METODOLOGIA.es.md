@@ -1322,6 +1322,9 @@ Burp Suite Documentation
 CVE-2007-2447
 Pivoting Techniques
 
+Para una **versión más extendida** del paso a paso, puedes visitar esta entrada que escribí en mi blog [esta entrada]([https://diariohacking.com/aprender-ciberseguridad/auditoria-de-seguridad-pentesting-web-y-pivoting-de-red])
+
+
 
 Autor: Estefanía Ramírez Martínez
 Fecha: Enero 2025
