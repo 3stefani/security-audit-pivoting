@@ -1274,47 +1274,20 @@ john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 # Ver resultados
 john --show hashes.txt
 
-9. Herramientas y Versiones
-HerramientaVersiónPropósitoKali Linux2024.1Sistema operativo atacanteBurp Suite Community2024.xProxy interceptorSkipfish2.10bWeb scannerMetasploit Framework6.3.xPlataforma de explotaciónmsfvenom6.3.xGenerador de payloadsJohn the Ripper1.9.0Password crackerPython3.11HTTP serverFirefox115 ESRNavegador web
+## 9. Herramientas y Versiones
+| Herramienta              | Versión | Propósito                          |
+|--------------------------|---------|------------------------------------|
+| Kali Linux               | 2024.1  | Sistema operativo atacante         |
+| Burp Suite Community     | 2024.x  | Proxy interceptor                  |
+| Skipfish                 | 2.10b   | Web scanner                        |
+| Metasploit Framework     | 6.3.x   | Plataforma de explotación          |
+| msfvenom                 | 6.3.x   | Generador de payloads              |
+| John the Ripper           | 1.9.0   | Password cracker                   |
+| Python                   | 3.11    | Servidor HTTP                      |
+| Firefox                  | 115 ESR | Navegador web                      |
 
-10. Tiempo Estimado por Fase
-FaseTiempoComplejidadSetup del Lab2 horasMediaReconocimiento1 horaBajaExplotación Web2 horasMedia-AltaPost-Explotación30 minBajaPivoting1.5 horasAltaExplotación Red Interna1 horaMediaPost-Explotación Avanzada1 horaMediaTOTAL~9 horas-
 
-11. Troubleshooting Común
-Problema: Webshell no se crea
-Solución:
-bash# En Ubuntu:
-sudo chmod 777 /var/www/html/mutillidae/
-
-# Verificar secure_file_priv en MySQL:
-sudo mysql -u root -p
-SHOW VARIABLES LIKE 'secure_file_priv';
-
-# Si no está vacío:
-sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
-# Añadir: secure_file_priv = ""
-sudo systemctl restart mysql
-Problema: Meterpreter no conecta
-Solución:
-bash# Verificar firewall en Kali:
-sudo iptables -L
-sudo ufw status
-
-# Verificar que el payload se ejecutó:
-# En webshell: ps aux | grep shell.elf
-Problema: Autoroute no funciona
-Solución:
-bash# Verificar sesión Meterpreter activa:
-sessions -l
-
-# Verificar rutas:
-sessions -i 1
-run autoroute -p
-
-# Re-añadir ruta si es necesario:
-run autoroute -s 192.168.8.0/24
-
-12. Referencias
+## 10. Referencias
 
 OWASP Testing Guide
 Metasploit Unleashed
