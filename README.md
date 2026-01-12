@@ -248,19 +248,19 @@ iptables -A FORWARD -i ens33 -o ens37 -p tcp --dport 443 -j ACCEPT
 
 ## Lessons Learned
 
-### 1️One vulnerability = Total compromise
+### One vulnerability = Total compromise
 
 **SQL Injection** → **Webshell** → **Pivoting** → **Internal network compromised**
 
-### 2️Segmentation without firewall is useless
+### Segmentation without firewall is useless
 
 Separating networks (DMZ / Internal) **is not enough** without active firewall controls.
 
-### 3️Defense in Depth is essential
+### Defense in Depth is essential
 
 Multiple security layers are required for effective protection.
 
-### 4️Detection is as important as prevention
+### Detection is as important as prevention
 
 Without active monitoring, the entire attack went **completely undetected**.
 
