@@ -153,15 +153,16 @@ Proyecto de demostración de auditoría de seguridad integral que incluye pentes
 ```
 pentesting-web-pivoting/
 │
-├── README.md                          # English version
+├── README.md                          # Versión en inglés
 ├── README.es.md                       # Este archivo (Español)
 │
 ├── documentacion/
 │   ├── informe-ejecutivo.pdf          # Informe completo en español
-│   ├── executive-report.pdf        # Full report in English
-│   └── metodologia.md                # Metodología detallada
+│   ├── executive-report.pdf           # Informe completo en inglés
+│   ├── methodology.es.md              # Metodología detallada en español
+│   └── methodology.md                 # Metodología detallada en inglés
 │
-└── img/                              # Imágenes del proceso
+└── img/                               # Imágenes del proceso
 ```
 
 ## Credenciales Comprometidas
