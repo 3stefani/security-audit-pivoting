@@ -1,5 +1,5 @@
 
-# Metodología de Pentesting - Guía Completa Paso a Paso
+# Pentesting Methodology - Complete Step-by-Step Guide
 
 [![en](https://img.shields.io/badge/lang-English-blue.svg)](METODOLOGIA.md)
 [![es](https://img.shields.io/badge/lang-Español-red.svg)](METODOLOGIA.es.md)
@@ -8,16 +8,16 @@
 
 ## 📋 Índice
 
-1. [Configuración del Laboratorio](#1-configuración-del-laboratorio)
-2. [Fase 1: Reconocimiento](#2-fase-1-reconocimiento)
-3. [Fase 2: Explotación Web](#3-fase-2-explotación-web)
-4. [Fase 3: Post-Explotación](#4-fase-3-post-explotación)
-5. [Fase 4: Pivoting](#5-fase-4-pivoting)
-6. [Fase 5: Explotación Red Interna](#6-fase-5-explotación-red-interna)
-7. [Fase 6: Post-Explotación Avanzada](#7-fase-6-post-explotación-avanzada)
-8. [Resumen de Comandos Utilizados](#8-resumen-de-comandos-utilizados)
-9. [Herramientas y Versiones](#9-Herramientas-y-versiones)
-10. [Referencias](#10-referencias)
+1. [Lab Configuration](#1-lab-configuration)
+2. [Phase 1: Reconnaissance](#2-phase-1-reconnaissance)
+3. [Phase 2: Web Exploitation](#3-phase-2-web-exploitation)
+4. [Phase 3: Post-Exploitation](#4-phase-3-post-exploitation)
+5. [Phase 4: Pivoting](#5-phase-4-pivoting)
+6. [Phase 5: Internal Network Exploitation](#6-phase-5-internal-network-exploitation)
+7. [Phase 6: Advanced Post-Exploitation](#7-phase-6-advance-post-exploitation)
+8. [Summary of Commands Used](#8-summary-of-commands-used)
+9. [Tools and Versions](#9-tools-and-versions)
+10. [References](#10-references)
 
 
 ---
