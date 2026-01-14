@@ -14,6 +14,10 @@
 5. [Fase 4: Pivoting](#5-fase-4-pivoting)
 6. [Fase 5: Explotación Red Interna](#6-fase-5-explotación-red-interna)
 7. [Fase 6: Post-Explotación Avanzada](#7-fase-6-post-explotación-avanzada)
+8. [Resumen de Comandos Utilizados](#8-resumen-de-comandos-utilizados)
+9. [Herramientas y Versiones](#9-Herramientas-y-versiones)
+10. [Referencias](#10-referencias)
+
 
 ---
 
