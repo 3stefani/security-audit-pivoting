@@ -1229,7 +1229,6 @@ john --show hashes.txt
 - [Metasploit Unleashed](https://www.offsec.com/metasploit-unleashed/)
 - [Burp Suite Documentation](https://portswigger.net/burp/documentation)
 - [CVE-2007-2447](https://nvd.nist.gov/vuln/detail/CVE-2007-2447)
-- [Pivoting Techniques](https://book.hacktricks.xyz/generic-methodologies-and-resources/tunneling-and-port-forwarding)
 
 For a **more extended version** of the step-by-step guide, you can visit [this entry](https://diariohacking.com/aprender-ciberseguridad/auditoria-de-seguridad-pentesting-web-y-pivoting-de-red) I wrote on my blog.
 
