@@ -1226,11 +1226,10 @@ john --show hashes.txt
 
 ## 10. Referencias
 
-OWASP Testing Guide
-Metasploit Unleashed
-Burp Suite Documentation
-CVE-2007-2447
-Pivoting Techniques
+- [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
+- [Metasploit Unleashed](https://www.offsec.com/metasploit-unleashed/)
+- [Burp Suite Documentation](https://portswigger.net/burp/documentation)
+- [CVE-2007-2447](https://nvd.nist.gov/vuln/detail/CVE-2007-2447)
 
 Para una **versión más extendida** del paso a paso, puedes visitar [esta entrada](https://diariohacking.com/aprender-ciberseguridad/auditoria-de-seguridad-pentesting-web-y-pivoting-de-red) que escribí en mi blog.
 
