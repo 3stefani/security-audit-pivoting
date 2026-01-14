@@ -162,7 +162,7 @@ pentesting-web-pivoting/
 │   ├── methodology.es.md               # Detailed methodology in Spanish
 │   └── methodology.md                  # Detailed methodology in English
 │
-└── img/
+└── img/                                # Images of the process
 ```
 
 ## Compromised Credentials
