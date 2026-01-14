@@ -158,8 +158,9 @@ pentesting-web-pivoting/
 │
 ├── documentation/
 │   ├── executive-report.pdf            # Full report in English
-│   ├── informe-ejecutivo.pdf        # Complete report in Spanish
-│   └── methodology.md                 # Detailed methodology
+│   ├── informe-ejecutivo.pdf           # Complete report in Spanish
+│   ├── methodology.es.md               # Detailed methodology in Spanish
+│   └── methodology.md                  # Detailed methodology
 │
 └── img/
 ```
